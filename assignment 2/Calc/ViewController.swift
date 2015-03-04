@@ -56,7 +56,7 @@ class ViewController : UIViewController
             }
             
             brain.setSecondDisplay()
-            displayOperand.text? = brain.secondDisplayText
+            displayOperand.text? = brain.description
         }
     }
     

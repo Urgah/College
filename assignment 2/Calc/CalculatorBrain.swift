@@ -107,6 +107,7 @@ class CalculatorBrain {
     func evaluate() -> Double? {
         let (result, remainder) = evaluate(opStack)
         println("\(opStack) = \(result) with \(remainder) left over")
+        
         if variableValues == nil && checkOpstack(){
             return nil
         }
@@ -126,7 +127,9 @@ class CalculatorBrain {
         variableValues?.removeAll(keepCapacity: true)
     }
     
-    var secondDisplayText: String = ""
+    var description: String { get { return secondDisplayText } }
+    
+    private var secondDisplayText: String = ""
     func setSecondDisplay() {
         var tempStack = opStack
         var tempSecondDisplayText = ""
@@ -166,12 +169,14 @@ class CalculatorBrain {
                 case "÷":
                 if numberStack.count < 2 {
                     tempSecondDisplayText = checkDisplay(tempSecondDisplayText)
-                    if !checkNumberstack(numberStack.count) {
+                    if checkNumberstack(numberStack.count) {
                         tempSecondDisplayText = "(\(tempSecondDisplayText))\(item)\(numberStack.removeLast())"
                     }
                 }
-                    else {
-                    tempSecondDisplayText += "\(numberStack.removeLast())\(item)\(numberStack.removeLast())"
+                else {
+                    var lastNumber = numberStack.removeLast()
+                    var firstNumber = numberStack.removeLast()
+                    tempSecondDisplayText += "\(firstNumber)\(item)\(lastNumber)"
                 }
                 default:
                     numberStack.append(item)
@@ -195,5 +200,4 @@ class CalculatorBrain {
         if number < 1 { return false }
         return true
     }
-
 }
