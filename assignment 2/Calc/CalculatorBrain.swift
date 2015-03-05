@@ -93,7 +93,7 @@ class CalculatorBrain {
     }
     
     //check if there is a variable in the opstack
-    func checkOpstack() -> Bool {
+    private func checkOpstack() -> Bool {
         for item in opStack {
             var tempItem = "\(item)"
             if tempItem == "M" {
@@ -154,6 +154,7 @@ class CalculatorBrain {
                             tempSecondDisplayText = "\(tempSecondDisplayText)\(item)\(numberStack.removeLast())" }
                     }
                     else {
+                        tempSecondDisplayText += seperateOperations(tempSecondDisplayText)
                         tempSecondDisplayText += "\(numberStack.removeLast())\(item)\(numberStack.removeLast())"
                     }
                 case "×":
@@ -164,6 +165,7 @@ class CalculatorBrain {
                         }
                     }
                     else {
+                        tempSecondDisplayText += seperateOperations(tempSecondDisplayText)
                         tempSecondDisplayText += "\(numberStack.removeLast())\(item)\(numberStack.removeLast())"
                     }
                 case "÷":
@@ -176,6 +178,7 @@ class CalculatorBrain {
                 else {
                     var lastNumber = numberStack.removeLast()
                     var firstNumber = numberStack.removeLast()
+                    tempSecondDisplayText += seperateOperations(tempSecondDisplayText)
                     tempSecondDisplayText += "\(firstNumber)\(item)\(lastNumber)"
                 }
                 default:
@@ -187,7 +190,7 @@ class CalculatorBrain {
     }
     
     //Func to check if there are enough numbers
-    func checkDisplay(display: String) -> String {
+    private func checkDisplay(display: String) -> String {
         if display == "" {
             return "?"
         }
@@ -196,8 +199,16 @@ class CalculatorBrain {
     }
     
     //Function to check if there are enough numbers to perform the operation
-    func checkNumberstack(number: Int) -> Bool {
+    private func checkNumberstack(number: Int) -> Bool {
         if number < 1 { return false }
         return true
+    }
+    
+    private func seperateOperations (displayText: String) -> String {
+        if displayText == "" {
+            return ""
+        }
+        
+        return ", "
     }
 }
