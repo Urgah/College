@@ -32,7 +32,6 @@ public class ImageActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image);
-
         gridViewController  = new GridViewController(this);
 
         Intent intent = getIntent();
@@ -60,8 +59,13 @@ public class ImageActivity extends ActionBarActivity {
         splitImage(image, difficulty, difficulty);
     }
 
-    public void onCreate() {
-        Log.d("MAD", "Created");
+    @Override
+    public void onStart(){
+        super.onStart();
+        Log.d("MAD", "Started");
+
+        final GridView grid = (GridView) findViewById(R.id.gridview);
+        gridViewController.shuffle(grid);
     }
 
     @Override
@@ -87,7 +91,6 @@ public class ImageActivity extends ActionBarActivity {
     }
 
     public void splitImage(ImageView image, int rows, int cols) {
-
         //For height and width of the small image chunks
         int chunkHeight,chunkWidth;
 
@@ -115,6 +118,7 @@ public class ImageActivity extends ActionBarActivity {
                 chunckedImgList.add(new Tile(i, map));
                 xCoord += chunkWidth;
             }
+
             yCoord += chunkHeight;
         }
     }

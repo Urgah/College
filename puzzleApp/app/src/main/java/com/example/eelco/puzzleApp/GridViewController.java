@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by Eelco on 26/03/15.
@@ -38,6 +39,9 @@ public class GridViewController {
             return;
         }
 
+        Log.d("MAD", "Move img: " + String.valueOf(position));
+        Log.d("MAD", "Empty img: " + String.valueOf(emptyImage));
+
         ImageView clickedImg = (ImageView) grid.getChildAt(position);
         ImageView imageToSet = (ImageView) grid.getChildAt(emptyImage);
         imageToSet.setImageBitmap(((BitmapDrawable)clickedImg.getDrawable()).getBitmap());
@@ -53,7 +57,6 @@ public class GridViewController {
 
         for(int i = 0; i < moves.size(); i++) {
             if(moves.get(i) == emptyImage) {
-                Log.d("MAD", String.valueOf(moves.get(i)));
                 return true;
             }
         }
@@ -116,5 +119,31 @@ public class GridViewController {
 
     public void startGame() {
 
+    }
+
+    public void shuffle(GridView grid) {
+        for(int i = 0; i < 50; i++) {
+            Random randomGenerator = new Random();
+            int randomInt = randomGenerator.nextInt(4);
+            Log.d("MAD", "Random int: " + String.valueOf(randomInt));
+            switch (randomInt) {
+                case 0:
+                    moveTile(emptyImage+1, grid);
+                    break;
+                case 1:
+                    moveTile(emptyImage-1, grid);
+                    break;
+                case 2:
+                    moveTile(emptyImage+3, grid);
+                    break;
+                case 3:
+                    moveTile(emptyImage-3, grid);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        moves = 0;
     }
 }
