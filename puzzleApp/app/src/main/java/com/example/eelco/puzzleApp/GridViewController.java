@@ -3,6 +3,7 @@ package com.example.eelco.puzzleApp;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -47,7 +48,7 @@ public class GridViewController {
         imageToSet.setImageBitmap(((BitmapDrawable)clickedImg.getDrawable()).getBitmap());
 
         emptyImage = position;
-        clickedImg.setImageBitmap(null);
+        clickedImg.setImageBitmap(generateBlackBitmap(clickedImg.getMaxWidth(), clickedImg.getMaxHeight()));
         moves++;
         checkWin(grid);
     }
@@ -122,28 +123,40 @@ public class GridViewController {
     }
 
     public void shuffle(GridView grid) {
-        for(int i = 0; i < 50; i++) {
-            Random randomGenerator = new Random();
-            int randomInt = randomGenerator.nextInt(4);
-            Log.d("MAD", "Random int: " + String.valueOf(randomInt));
-            switch (randomInt) {
-                case 0:
-                    moveTile(emptyImage+1, grid);
-                    break;
-                case 1:
-                    moveTile(emptyImage-1, grid);
-                    break;
-                case 2:
-                    moveTile(emptyImage+3, grid);
-                    break;
-                case 3:
-                    moveTile(emptyImage-3, grid);
-                    break;
-                default:
-                    break;
-            }
-        }
+//        for(int i = 0; i < 50; i++) {
+//            Random randomGenerator = new Random();
+//            int randomInt = randomGenerator.nextInt(4);
+//            Log.d("MAD", "Random int: " + String.valueOf(randomInt));
+//            switch (randomInt) {
+//                case 0:
+//                    moveTile(emptyImage+1, grid);
+//                    break;
+//                case 1:
+//                    moveTile(emptyImage-1, grid);
+//                    break;
+//                case 2:
+//                    moveTile(emptyImage+3, grid);
+//                    break;
+//                case 3:
+//                    moveTile(emptyImage-3, grid);
+//                    break;
+//                default:
+//                    break;
+//            }
+//        }
 
         moves = 0;
+    }
+
+    private Bitmap generateBlackBitmap(int width, int height) {
+        int[] colors = new int[width * height];
+
+        for(int i = 0; i < width*height; i++) {
+            colors[i] = Color.BLACK;
+        }
+
+        Bitmap bitmap = Bitmap.createBitmap(colors, width, height, Bitmap.Config.ARGB_8888);
+
+        return bitmap;
     }
 }
