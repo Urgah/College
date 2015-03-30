@@ -4,9 +4,19 @@
     android:layout_height="match_parent"
     android:id="@+id/mainLayout">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Moves: 0"
+        android:id="@+id/amountMoves"
+        android:layout_gravity="right" />
+
     <GridView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/gridview"
         android:layout_gravity="center_horizontal"/>
+
+
 </LinearLayout>

@@ -20,12 +20,12 @@ import android.widget.TextView;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Random;
 
 
 public class ImageActivity extends ActionBarActivity {
     private static ArrayList<Tile> chunckedImgList = new ArrayList<Tile>();
     public static int difficulty;
-
     public GridViewController gridViewController;
 
     @Override
@@ -63,9 +63,13 @@ public class ImageActivity extends ActionBarActivity {
     public void onStart(){
         super.onStart();
         Log.d("MAD", "Started");
+    }
 
-        final GridView grid = (GridView) findViewById(R.id.gridview);
-        gridViewController.shuffle(grid);
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d("MAD", "onResume");
+
     }
 
     @Override
@@ -129,5 +133,38 @@ public class ImageActivity extends ActionBarActivity {
 
     public static void resetArrayList() {
         chunckedImgList = new ArrayList<Tile>();
+    }
+
+    public void updateMoves(int moves) {
+        TextView movesText = (TextView) findViewById(R.id.amountMoves);
+        movesText.setText("Moves: " + String.valueOf(moves));
+    }
+
+    public void shuffle() {
+        GridView grid = (GridView) findViewById(R.id.gridview);
+
+        for(int i = 0; i < 50; i++) {
+            Random randomGenerator = new Random();
+            int randomInt = randomGenerator.nextInt(4);
+            Log.d("MAD", "Random int: " + String.valueOf(randomInt));
+            switch (randomInt) {
+                case 0:
+                    gridViewController.moveTile(gridViewController.emptyImage+1, grid);
+                    break;
+                case 1:
+                    gridViewController.moveTile(gridViewController.emptyImage-1, grid);
+                    break;
+                case 2:
+                    gridViewController.moveTile(gridViewController.emptyImage+3, grid);
+                    break;
+                case 3:
+                    gridViewController.moveTile(gridViewController.emptyImage-3, grid);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        updateMoves(0);
     }
 }
