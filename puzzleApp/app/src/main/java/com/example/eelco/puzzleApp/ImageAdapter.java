@@ -38,7 +38,6 @@ public class ImageAdapter extends BaseAdapter {
         return 0;
     }
 
-    // create a new ImageView for each item referenced by the Adapter
     public View getView(int position, View convertView, ViewGroup parent) {
         ImageView imageView;
 
@@ -48,10 +47,10 @@ public class ImageAdapter extends BaseAdapter {
         display.getSize(size);
 
         int difficulty = imageActivity.difficulty;
+        //difficulty - 1 (amount images) * 8 because of the padding
         int width = (size.x - ((difficulty-1) * 8)) / difficulty;
 
         if (convertView == null) {
-            // if it's not recycled, initialize some attributes
             imageView = new ImageView(mContext);
             imageView.setLayoutParams(new GridView.LayoutParams(width, width));
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);

@@ -2,6 +2,7 @@ package com.example.eelco.puzzleApp;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -35,25 +36,29 @@ public class GridViewController {
         imageActivity = imageActivityInstance;
     }
 
-    //REMOVE UNUSED PARAMS
-    public void moveTile(int position, GridView grid) {
+    public void moveTile(int position, GridView grid, Boolean canWin) {
         boolean canMove = checkPosition(position);
-        if(canMove == false) {
+        if(!canMove) {
             return;
         }
 
-        Log.d("MAD", "Move img: " + String.valueOf(position));
-        Log.d("MAD", "Empty img: " + String.valueOf(emptyImage));
+        swapTiles(position, grid);
 
+        moves++;
+        imageActivity.updateMoves(moves);
+
+        if(canWin) {
+            checkWin(grid);
+        }
+    }
+
+    public void swapTiles(int position, GridView grid) {
         ImageView clickedImg = (ImageView) grid.getChildAt(position);
         ImageView imageToSet = (ImageView) grid.getChildAt(emptyImage);
         imageToSet.setImageBitmap(((BitmapDrawable)clickedImg.getDrawable()).getBitmap());
 
         emptyImage = position;
         clickedImg.setImageBitmap(null);
-        moves++;
-        imageActivity.updateMoves(moves);
-        checkWin(grid);
     }
 
     private boolean checkPosition(int position) {
@@ -68,7 +73,7 @@ public class GridViewController {
         return false;
     }
 
-    private List<Integer> getPossibleMoves(int position) {
+    public List<Integer> getPossibleMoves(int position) {
         List<Integer> list = new ArrayList<Integer>();
         list = addMove(list, position, 1);
         list = addMove(list, position, -1);
@@ -87,7 +92,7 @@ public class GridViewController {
         }
 
         //Are we on the right side?
-        if(position % difficuly == 3 && calc == 1) {
+        if(position % difficuly == difficuly && calc == 1) {
             return list;
         }
 
@@ -101,6 +106,7 @@ public class GridViewController {
 
     private void checkWin(GridView grid) {
         ArrayList<Tile> positionList = imageActivity.getImageList();
+
         //cant check the last img since we didnt place it in the grid
         for(int i = 0; i < positionList.size() - 1; i++) {
             ImageView clickedImg = (ImageView) grid.getChildAt(i);
@@ -111,13 +117,33 @@ public class GridViewController {
             }
         }
 
-        Dialog dialog = new Dialog(imageActivity);
-        dialog.setContentView(R.layout.game_won);
-        TextView txt = (TextView)dialog.findViewById(R.id.moves);
-        txt.setText("Moves: " + moves);
-        //TODO: add button to go to main screen
+        imageActivity.gameWon();
+    }
 
-        //TODO: prevent user from going back to game
-        dialog.show();
+    public void shuffle(GridView grid) {
+        int prev_pos = emptyImage;
+        int prev_move = 0;
+
+        for(int i = 0; i < (difficuly*20); i++) {
+            int position = validMove(prev_pos, prev_move);
+
+            prev_move = prev_pos;
+            prev_pos = position;
+            moveTile(position, grid, false);
+        }
+
+        imageActivity.updateMoves(0);
+        moves = 0;
+    }
+
+    private int validMove(int prev_pos, int prev_move) {
+        List<Integer> possibleMoves = getPossibleMoves(prev_pos);
+        Random randomGenerator = new Random();
+        int position = possibleMoves.get(randomGenerator.nextInt(possibleMoves.size()));
+        if (position == prev_move) {
+            position = validMove(prev_pos, prev_move);
+        }
+
+        return position;
     }
 }

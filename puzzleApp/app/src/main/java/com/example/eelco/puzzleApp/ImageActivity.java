@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.CountDownTimer;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 
@@ -27,6 +29,8 @@ public class ImageActivity extends ActionBarActivity {
     private static ArrayList<Tile> chunckedImgList = new ArrayList<Tile>();
     public static int difficulty;
     public GridViewController gridViewController;
+    public int resourceId;
+    public Boolean gameStarted = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +40,9 @@ public class ImageActivity extends ActionBarActivity {
 
         Intent intent = getIntent();
         difficulty = intent.getIntExtra("difficulty", 4);
+        Log.d("diff", "imageactivity: " + String.valueOf(difficulty));
         gridViewController.difficuly = difficulty;
-        int resourceId = intent.getIntExtra("resourceid", 0);
+        resourceId = intent.getIntExtra("resourceid", 0);
 
         GridView grid = (GridView) findViewById(R.id.gridview);
         grid.setAdapter(new ImageAdapter(this));
@@ -48,7 +53,9 @@ public class ImageActivity extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
-                gridViewController.moveTile(position, final_grid);
+                if(gameStarted) {
+                    gridViewController.moveTile(position, final_grid, true);
+                }
             }
         });
 
@@ -91,6 +98,27 @@ public class ImageActivity extends ActionBarActivity {
             return true;
         }
 
+        Intent intent;
+        switch (id) {
+            case R.id.shuffle:
+                gridViewController.shuffle((GridView) findViewById(R.id.gridview));
+                break;
+            case R.id.quitGame:
+                Log.d("MAD", "back to home screen");
+                intent = new Intent(ImageActivity.this, MainActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.changeDifficulty:
+                Log.d("MAD", "change difficulty");
+                intent = new Intent(ImageActivity.this, ChangeDifficulty.class);
+                intent.putExtra("difficulty", difficulty);
+                intent.putExtra("resourceid", resourceId);
+                startActivity(intent);
+                break;
+            default:
+                break;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -125,6 +153,18 @@ public class ImageActivity extends ActionBarActivity {
 
             yCoord += chunkHeight;
         }
+
+        CountDownTimer countDownTimer = new CountDownTimer(3000, 1000){
+            public void onTick(long millisUntilFinished) {
+
+            }
+
+            public void onFinish() {
+                final GridView grid = (GridView) findViewById(R.id.gridview);
+                gridViewController.shuffle(grid);
+                gameStarted = true;
+            }
+        }.start();
     }
 
     public ArrayList<Tile> getImageList() {
@@ -140,31 +180,11 @@ public class ImageActivity extends ActionBarActivity {
         movesText.setText("Moves: " + String.valueOf(moves));
     }
 
-    public void shuffle() {
-        GridView grid = (GridView) findViewById(R.id.gridview);
-
-        for(int i = 0; i < 50; i++) {
-            Random randomGenerator = new Random();
-            int randomInt = randomGenerator.nextInt(4);
-            Log.d("MAD", "Random int: " + String.valueOf(randomInt));
-            switch (randomInt) {
-                case 0:
-                    gridViewController.moveTile(gridViewController.emptyImage+1, grid);
-                    break;
-                case 1:
-                    gridViewController.moveTile(gridViewController.emptyImage-1, grid);
-                    break;
-                case 2:
-                    gridViewController.moveTile(gridViewController.emptyImage+3, grid);
-                    break;
-                case 3:
-                    gridViewController.moveTile(gridViewController.emptyImage-3, grid);
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        updateMoves(0);
+    public void gameWon() {
+        Intent intent = new Intent(ImageActivity.this, GameWonActivity.class);
+        intent.putExtra("difficulty", difficulty);
+        intent.putExtra("resourceid", resourceId);
+        intent.putExtra("moves", gridViewController.moves);
+        startActivity(intent);
     }
 }

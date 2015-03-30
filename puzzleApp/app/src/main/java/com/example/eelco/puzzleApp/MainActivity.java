@@ -2,6 +2,7 @@ package com.example.eelco.puzzleApp;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +19,8 @@ import android.widget.TextView;
 import java.lang.reflect.Field;
 
 public class MainActivity extends ActionBarActivity {
+    private int difficulty;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +61,27 @@ public class MainActivity extends ActionBarActivity {
                 Log.e("MAD","### OOPS", e);
             }
         }
+
+        SharedPreferences preferences = getSharedPreferences("settings", 0);
+        int pref_difficulty = preferences.getInt("difficulty", 4);
+        difficulty = pref_difficulty;
+
+        RadioButton radioButton;
+        switch (difficulty) {
+            case 3:
+                radioButton = (RadioButton) findViewById(R.id.easyMode);
+                radioButton.setChecked(true);
+                break;
+            case 4:
+                radioButton = (RadioButton) findViewById(R.id.mediumMode);
+                radioButton.setChecked(true);
+                break;
+            case 5:
+                radioButton = (RadioButton) findViewById(R.id.hardMode);
+                radioButton.setChecked(true);
+                break;
+            default: break;
+        }
     }
 
 
@@ -83,7 +107,6 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private int difficulty = 4;
     public void onRadioButtonClicked(View view) {
         // Is the button now checked?
         boolean checked = ((RadioButton) view).isChecked();
@@ -103,6 +126,15 @@ public class MainActivity extends ActionBarActivity {
                     break;
         }
 
+        storeDifficulty(difficulty);
         Log.d("MAD", "difficulty set: " + difficulty);
+    }
+
+    //Static because I want to use it form all classes
+    public void storeDifficulty(int difficulty) {
+        SharedPreferences preferences = getSharedPreferences("settings", 0);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt("difficulty", difficulty);
+        editor.commit();
     }
 }

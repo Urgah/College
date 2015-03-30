@@ -20,6 +20,14 @@
             android:name=".ImageActivity"
             android:label="@string/title_activity_image" >
         </activity>
+        <activity
+            android:name=".ChangeDifficulty"
+            android:label="ChangeDifficulty" >
+        </activity>
+        <activity
+            android:name=".GameWonActivity"
+            android:label="@string/title_activity_gamewon" >
+        </activity>
     </application>
 
 </manifest>
