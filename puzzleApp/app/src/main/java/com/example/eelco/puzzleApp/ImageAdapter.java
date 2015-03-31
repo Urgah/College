@@ -48,13 +48,12 @@ public class ImageAdapter extends BaseAdapter {
 
         int difficulty = imageActivity.difficulty;
         //difficulty - 1 (amount images) * 8 because of the padding
-        int width = (size.x - ((difficulty-1) * 8)) / difficulty;
+        int width = size.x  / difficulty;
 
         if (convertView == null) {
             imageView = new ImageView(mContext);
             imageView.setLayoutParams(new GridView.LayoutParams(width, width));
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            imageView.setPadding(8, 4, 8, 4);
         } else {
             imageView = (ImageView) convertView;
         }

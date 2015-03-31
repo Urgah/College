@@ -42,7 +42,12 @@ public class GridViewController {
             return;
         }
 
-        swapTiles(position, grid);
+        ImageView clickedImg = (ImageView) grid.getChildAt(position);
+        ImageView imageToSet = (ImageView) grid.getChildAt(emptyImage);
+        imageToSet.setImageBitmap(((BitmapDrawable)clickedImg.getDrawable()).getBitmap());
+
+        emptyImage = position;
+        clickedImg.setImageBitmap(null);
 
         moves++;
         imageActivity.updateMoves(moves);
@@ -50,15 +55,6 @@ public class GridViewController {
         if(canWin) {
             checkWin(grid);
         }
-    }
-
-    public void swapTiles(int position, GridView grid) {
-        ImageView clickedImg = (ImageView) grid.getChildAt(position);
-        ImageView imageToSet = (ImageView) grid.getChildAt(emptyImage);
-        imageToSet.setImageBitmap(((BitmapDrawable)clickedImg.getDrawable()).getBitmap());
-
-        emptyImage = position;
-        clickedImg.setImageBitmap(null);
     }
 
     private boolean checkPosition(int position) {

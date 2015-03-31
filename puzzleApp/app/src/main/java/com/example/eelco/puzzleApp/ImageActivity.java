@@ -123,27 +123,25 @@ public class ImageActivity extends ActionBarActivity {
     }
 
     public void splitImage(ImageView image, int rows, int cols) {
-        //For height and width of the small image chunks
-        int chunkHeight,chunkWidth;
-
         //Getting the scaled bitmap of the source image
         BitmapDrawable drawable = (BitmapDrawable) image.getDrawable();
         Bitmap bitmap = drawable.getBitmap();
         Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, bitmap.getWidth(), bitmap.getHeight(), true);
 
-        chunkHeight = bitmap.getHeight()/rows;
-        chunkWidth = bitmap.getWidth()/cols;
-        int imageNumber = rows * cols;
+        int chunkHeight = bitmap.getHeight()/rows;
+        int chunkWidth = bitmap.getWidth()/cols;
 
         //The amount of images
         int i = rows * cols;
+
+        //Set the last image as empty
         gridViewController.emptyImage = i - 1;
 
         //xCoord and yCoord are the pixel positions of the image chunks
         int yCoord = 0;
-        for(int x=0; x<rows; x++){
+        for(int x = 0; x < rows; x++){
             int xCoord = 0;
-            for(int y=0; y<cols; y++){
+            for(int y = 0; y < cols; y++){
                 Bitmap map = Bitmap.createBitmap(scaledBitmap, xCoord, yCoord, chunkWidth, chunkHeight);
                 i--;
 
@@ -161,7 +159,7 @@ public class ImageActivity extends ActionBarActivity {
 
             public void onFinish() {
                 final GridView grid = (GridView) findViewById(R.id.gridview);
-                gridViewController.shuffle(grid);
+               // gridViewController.shuffle(grid);
                 gameStarted = true;
             }
         }.start();
