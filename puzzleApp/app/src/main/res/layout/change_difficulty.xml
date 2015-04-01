@@ -29,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="75dp"
             android:text="Medium"
-            android:id="@+id/mediumMode"
+            android:id="@+id/medium"
             android:checked="false"
             android:layout_alignTop="@+id/medium"
             android:layout_centerHorizontal="true"
