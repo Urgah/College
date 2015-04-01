@@ -3,7 +3,6 @@ package com.example.eelco.puzzleApp;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.Image;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,28 +17,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 
 public class MainActivity extends ActionBarActivity {
     private int difficulty;
-    public static ArrayList<Integer> resourceIdList = new ArrayList<Integer>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        GridView grid = (GridView) findViewById(R.id.gridMain);
-        grid.setAdapter(new MainImageAdapter(this));
-//        grid.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View arg0) {
-//                ImageActivity.resetArrayList();
-//                Intent intent = new Intent(MainActivity.this, ImageActivity.class);
-//                intent.putExtra("difficulty", difficulty);
-//                intent.putExtra("resourceid", resourceId);
-//                startActivity(intent);
-//            }
-//        });
 
         Field[] imageResources = R.drawable.class.getFields();
         for (Field f : imageResources) {
@@ -48,31 +33,29 @@ public class MainActivity extends ActionBarActivity {
                 if(!name.contains("abc")) {
                     final int resourceId = f.getInt(null);
                     Log.d("MAD", "### afbeelding resource naam: " + name + ", id:" + resourceId);
-                    resourceIdList.add(resourceId);
-                    Log.d("MAD", "resourceid added: " + String.valueOf(resourceId));
 
-//                    ImageView image = new ImageView(this);
-//                    image.setImageResource(resourceId);
-//                    image.setId(resourceId);
+                    ImageView image = new ImageView(this);
+                    image.setImageResource(resourceId);
+                    image.setId(resourceId);
 
-//                    Button button = new Button(this);
-//                    button.setText(name);
-//                    button.setOnClickListener(new View.OnClickListener() {
-//                        public void onClick(View arg0) {
-//                            ImageActivity.resetArrayList();
-//                            Intent intent = new Intent(MainActivity.this, ImageActivity.class);
-//                            intent.putExtra("difficulty", difficulty);
-//                            intent.putExtra("resourceid", resourceId);
-//                            startActivity(intent);
-//                        }
-//                    });
+                    Button button = new Button(this);
+                    button.setText(name);
+                    button.setOnClickListener(new View.OnClickListener() {
+                        public void onClick(View arg0) {
+                            ImageActivity.resetArrayList();
+                            Intent intent = new Intent(MainActivity.this, ImageActivity.class);
+                            intent.putExtra("difficulty", difficulty);
+                            intent.putExtra("resourceid", resourceId);
+                            startActivity(intent);
+                        }
+                    });
 
-//                    LinearLayout newLayout = new LinearLayout(this);
-//                    newLayout.addView(image, 200, 200);
-//                    newLayout.addView(button, 200, 100);
+                    LinearLayout newLayout = new LinearLayout(this);
+                    newLayout.addView(image, 200, 200);
+                    newLayout.addView(button, 200, 100);
 
-//                    LinearLayout layout = (LinearLayout) findViewById(R.id.imagesClick);
-//                    layout.addView(newLayout, 400, 250);
+                    LinearLayout layout = (LinearLayout) findViewById(R.id.imagesClick);
+                    layout.addView(newLayout, 400, 250);
                 }
             } catch (Exception e) {
                 Log.e("MAD","### OOPS", e);
@@ -126,7 +109,6 @@ public class MainActivity extends ActionBarActivity {
 
     public void onRadioButtonClicked(View view) {
         // Is the button now checked?
-        Log.d("MAD", "radio clicked");
         boolean checked = ((RadioButton) view).isChecked();
         // Check which radio button was clicked
         switch(view.getId()) {

@@ -4,13 +4,11 @@ import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.CountDownTimer;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -62,9 +60,10 @@ public class ImageActivity extends ActionBarActivity {
         });
 
         ImageView image = new ImageView(this);
+        //Need this later with 3 sec timeout
         image.setImageResource(resourceId);
 
-        splitImage(image);
+        splitImage(image, difficulty, difficulty);
     }
 
     @Override
@@ -123,26 +122,26 @@ public class ImageActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void splitImage(ImageView image) {
-        //Getting the scaled bitmap of the imageview
+    public void splitImage(ImageView image, int rows, int cols) {
+        //Getting the scaled bitmap of the source image
         BitmapDrawable drawable = (BitmapDrawable) image.getDrawable();
         Bitmap bitmap = drawable.getBitmap();
         Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, bitmap.getWidth(), bitmap.getHeight(), true);
 
-        int chunkHeight = (bitmap.getHeight())/difficulty - 1;
-        int chunkWidth = (bitmap.getWidth())/difficulty - 3;
+        int chunkHeight = bitmap.getHeight()/rows;
+        int chunkWidth = bitmap.getWidth()/cols;
 
         //The amount of images
-        int i = difficulty * difficulty;
+        int i = rows * cols;
 
         //Set the last image as empty
         gridViewController.emptyImage = i - 1;
 
         //xCoord and yCoord are the pixel positions of the image chunks
         int yCoord = 0;
-        for(int x = 0; x < difficulty; x++){
+        for(int x = 0; x < rows; x++){
             int xCoord = 0;
-            for(int y = 0; y < difficulty; y++){
+            for(int y = 0; y < cols; y++){
                 Bitmap map = Bitmap.createBitmap(scaledBitmap, xCoord, yCoord, chunkWidth, chunkHeight);
                 i--;
 
