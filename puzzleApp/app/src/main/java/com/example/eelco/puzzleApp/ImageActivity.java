@@ -40,7 +40,6 @@ public class ImageActivity extends ActionBarActivity {
 
         Intent intent = getIntent();
         difficulty = intent.getIntExtra("difficulty", 4);
-        Log.d("diff", "imageactivity: " + String.valueOf(difficulty));
         gridViewController.difficuly = difficulty;
         resourceId = intent.getIntExtra("resourceid", 0);
 
@@ -60,23 +59,9 @@ public class ImageActivity extends ActionBarActivity {
         });
 
         ImageView image = new ImageView(this);
-        //Need this later with 3 sec timeout
         image.setImageResource(resourceId);
 
         splitImage(image, difficulty, difficulty);
-    }
-
-    @Override
-    public void onStart(){
-        super.onStart();
-        Log.d("MAD", "Started");
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        Log.d("MAD", "onResume");
-
     }
 
     @Override
@@ -159,7 +144,7 @@ public class ImageActivity extends ActionBarActivity {
 
             public void onFinish() {
                 final GridView grid = (GridView) findViewById(R.id.gridview);
-               // gridViewController.shuffle(grid);
+                gridViewController.shuffle(grid);
                 gameStarted = true;
             }
         }.start();

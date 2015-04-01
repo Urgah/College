@@ -1,5 +1,6 @@
 package com.example.eelco.puzzleApp;
 
+import android.app.ActionBar;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -34,28 +35,29 @@ public class MainActivity extends ActionBarActivity {
                     final int resourceId = f.getInt(null);
                     Log.d("MAD", "### afbeelding resource naam: " + name + ", id:" + resourceId);
 
-                    ImageView image = new ImageView(this);
+                    final ImageView image = new ImageView(this);
                     image.setImageResource(resourceId);
                     image.setId(resourceId);
-
-                    Button button = new Button(this);
-                    button.setText(name);
-                    button.setOnClickListener(new View.OnClickListener() {
-                        public void onClick(View arg0) {
-                            ImageActivity.resetArrayList();
-                            Intent intent = new Intent(MainActivity.this, ImageActivity.class);
-                            intent.putExtra("difficulty", difficulty);
-                            intent.putExtra("resourceid", resourceId);
-                            startActivity(intent);
+                    View.OnClickListener clickListener = new View.OnClickListener() {
+                        public void onClick(View v) {
+                            if (v.equals(image)) {
+                                Log.d("MAD", "Magic?");
+                                ImageActivity.resetArrayList();
+                                Intent intent = new Intent(MainActivity.this, ImageActivity.class);
+                                intent.putExtra("difficulty", difficulty);
+                                intent.putExtra("resourceid", resourceId);
+                                startActivity(intent);
+                            }
                         }
-                    });
+                    };
+                    image.setOnClickListener(clickListener);
 
-                    LinearLayout newLayout = new LinearLayout(this);
-                    newLayout.addView(image, 200, 200);
-                    newLayout.addView(button, 200, 100);
+                    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                    lp.setMargins(0, 0, 0, 20);
+                    image.setLayoutParams(lp);
 
                     LinearLayout layout = (LinearLayout) findViewById(R.id.imagesClick);
-                    layout.addView(newLayout, 400, 250);
+                    layout.addView(image);
                 }
             } catch (Exception e) {
                 Log.e("MAD","### OOPS", e);
