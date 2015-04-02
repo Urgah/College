@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController : UIViewController
+class CalculatorViewController : UIViewController
 {
     @IBOutlet weak var display: UILabel!
     @IBOutlet weak var displayOperand: UILabel!
@@ -17,6 +17,10 @@ class ViewController : UIViewController
     
     
     var brain = CalculatorBrain()
+    
+    @IBAction func performSeque(sender: UIButton) {
+           self.performSegueWithIdentifier("toGraph", sender: self)
+    }
     
     @IBAction func appendDigit(sender: UIButton){
         let digit = sender.currentTitle!
