@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/gridview"
         android:horizontalSpacing="5dp"
-        android:verticalSpacing="2.5dp"
+        android:verticalSpacing="1dp"
         android:layout_gravity="center_horizontal"/>
 
 

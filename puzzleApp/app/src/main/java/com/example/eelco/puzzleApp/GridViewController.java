@@ -88,7 +88,7 @@ public class GridViewController {
         }
 
         //Are we on the right side?
-        if(position % difficuly == difficuly && calc == 1) {
+        if(position % difficuly == difficuly - 1 && calc == 1) {
             return list;
         }
 

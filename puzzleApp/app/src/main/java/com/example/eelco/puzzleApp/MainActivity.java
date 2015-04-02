@@ -41,7 +41,6 @@ public class MainActivity extends ActionBarActivity {
                     View.OnClickListener clickListener = new View.OnClickListener() {
                         public void onClick(View v) {
                             if (v.equals(image)) {
-                                Log.d("MAD", "Magic?");
                                 ImageActivity.resetArrayList();
                                 Intent intent = new Intent(MainActivity.this, ImageActivity.class);
                                 intent.putExtra("difficulty", difficulty);

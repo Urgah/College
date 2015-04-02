@@ -23,7 +23,7 @@ public class ChangeDifficulty extends ActionBarActivity {
         setContentView(R.layout.change_difficulty);
 
         Intent intent = getIntent();
-        difficulty = intent.getIntExtra("difficulty", 4);
+        difficulty = intent.getIntExtra("difficulty", 0);
         resourceId = intent.getIntExtra("resourceid", 0);
 
         SharedPreferences preferences = getSharedPreferences("settings", 0);
@@ -86,5 +86,6 @@ public class ChangeDifficulty extends ActionBarActivity {
 
     public void onRadioButtonClicked(View view) {
         difficulty = Integer.parseInt(view.getTag().toString());
+        Log.d("MAD", String.valueOf(difficulty));
     }
 }

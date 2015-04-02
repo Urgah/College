@@ -47,7 +47,6 @@ public class ImageAdapter extends BaseAdapter {
         display.getSize(size);
 
         int difficulty = imageActivity.difficulty;
-        //difficulty - 1 (amount images) * 8 because of the padding
         int width = size.x  / difficulty;
 
         if (convertView == null) {
