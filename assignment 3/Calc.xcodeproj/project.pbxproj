@@ -14,8 +14,8 @@
 		288AB6B91A8A27040043DC67 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 288AB6B71A8A27040043DC67 /* LaunchScreen.xib */; };
 		288AB6C51A8A27050043DC67 /* CalcTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288AB6C41A8A27050043DC67 /* CalcTests.swift */; };
 		49226EE71A9CF68E00B0E11E /* CalculatorBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49226EE61A9CF68E00B0E11E /* CalculatorBrain.swift */; };
-		49CFF64D1ACF53C700706D1E /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CFF64B1ACF53C700706D1E /* GraphView.swift */; };
-		49CFF64E1ACF53C700706D1E /* GraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CFF64C1ACF53C700706D1E /* GraphViewController.swift */; };
+		492F7A551ACE88AB002FC936 /* GraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492F7A541ACE88AB002FC936 /* GraphViewController.swift */; };
+		492F7A591ACEA157002FC936 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492F7A581ACEA157002FC936 /* GraphView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,8 +40,8 @@
 		288AB6C31A8A27050043DC67 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		288AB6C41A8A27050043DC67 /* CalcTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalcTests.swift; sourceTree = "<group>"; };
 		49226EE61A9CF68E00B0E11E /* CalculatorBrain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorBrain.swift; sourceTree = "<group>"; };
-		49CFF64B1ACF53C700706D1E /* GraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
-		49CFF64C1ACF53C700706D1E /* GraphViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphViewController.swift; sourceTree = "<group>"; };
+		492F7A541ACE88AB002FC936 /* GraphViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphViewController.swift; sourceTree = "<group>"; };
+		492F7A581ACEA157002FC936 /* GraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,12 +83,12 @@
 		288AB6AB1A8A27040043DC67 /* Calc */ = {
 			isa = PBXGroup;
 			children = (
-				49CFF64B1ACF53C700706D1E /* GraphView.swift */,
-				49CFF64C1ACF53C700706D1E /* GraphViewController.swift */,
 				288AB6B01A8A27040043DC67 /* CalculatorViewController.swift */,
 				288AB6B21A8A27040043DC67 /* Main.storyboard */,
 				288AB6AC1A8A27040043DC67 /* Supporting Files */,
 				49226EE61A9CF68E00B0E11E /* CalculatorBrain.swift */,
+				492F7A541ACE88AB002FC936 /* GraphViewController.swift */,
+				492F7A581ACEA157002FC936 /* GraphView.swift */,
 			);
 			path = Calc;
 			sourceTree = "<group>";
@@ -221,11 +221,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				492F7A591ACEA157002FC936 /* GraphView.swift in Sources */,
 				49226EE71A9CF68E00B0E11E /* CalculatorBrain.swift in Sources */,
-				49CFF64E1ACF53C700706D1E /* GraphViewController.swift in Sources */,
+				492F7A551ACE88AB002FC936 /* GraphViewController.swift in Sources */,
 				288AB6B11A8A27040043DC67 /* CalculatorViewController.swift in Sources */,
 				288AB6AF1A8A27040043DC67 /* AppDelegate.swift in Sources */,
-				49CFF64D1ACF53C700706D1E /* GraphView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
