@@ -15,12 +15,20 @@ class CalculatorViewController : UIViewController
     
     var userIsInTheMiddleOfTypingANumber = false
     
-    
+    var graphView = GraphView()
     var brain = CalculatorBrain()
     
-    @IBAction func performSeque(sender: UIButton) {
-           self.performSegueWithIdentifier("toGraph", sender: self)
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        var destination = segue.destinationViewController as? UIViewController
+        if let nc = destination as? UINavigationController {
+            destination = nc.visibleViewController
+        }
+        if let gvc = destination as? GraphViewController {
+            gvc.title = displayOperand.text!
+            gvc.points = brain.setGraphViewPoints()
+        }
     }
+
     
     @IBAction func appendDigit(sender: UIButton){
         let digit = sender.currentTitle!
