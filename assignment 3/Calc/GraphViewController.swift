@@ -11,13 +11,12 @@ import UIKit
 
 class GraphViewController: UIViewController {
     @IBOutlet weak var graphView: GraphView!
+  
     var points: [Double] = [1,0]
     override func viewDidLoad() {
-        graphView.setGraphPoints(points)
         super.viewDidLoad()
+        graphView.setGraphPoints(points)
     }
-
-   
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

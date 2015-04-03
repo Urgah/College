@@ -11,7 +11,6 @@ import UIKit
 
 @IBDesignable
 class GraphView: UIView {
-    
     var graphPoints: [CGFloat] = []
     
     override func drawRect(rect: CGRect) {
@@ -46,13 +45,14 @@ class GraphView: UIView {
         var point = CGPointMake(CGFloat(columnXPoint(0)), columnYPoint(graphPoints[0]))
         //Go to start of line
         graphPath.moveToPoint(point)
+
         
         //Add (x,y) points 
         for i in 1..<graphPoints.count {
             var pointY: CGFloat = columnYPoint(graphPoints[i])
-            
             let nextPoint: CGPoint = CGPointMake(columnXPoint(i), pointY)
-
+            
+            //draw the line
             graphPath.addLineToPoint(nextPoint)
         }
         
@@ -61,10 +61,19 @@ class GraphView: UIView {
     
     func setGraphPoints(graphList: [Double]) {
         var internGraphPoints: [CGFloat] = []
-        for i in 0..<graphList.count {
+        for i in 1..<graphList.count {
             internGraphPoints.append(CGFloat(graphList[i]))
         }
         
         self.graphPoints = internGraphPoints;
+    }
+    
+    func createCGPoint(x: CGFloat, y: CGFloat) -> CGPoint {
+        var point: CGPoint = CGPointMake(x, y)
+        return point
+    }
+    
+    func xAxisPoints() -> [CGPoint] {
+        return [createCGPoint(0, y: -3), createCGPoint(0, y: -2), createCGPoint(0, y: -1), createCGPoint(0, y: 0), createCGPoint(0, y: 1), createCGPoint(0, y: 2), createCGPoint(0, y: 3)]
     }
 }
