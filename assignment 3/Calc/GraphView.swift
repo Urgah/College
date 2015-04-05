@@ -17,20 +17,6 @@ class GraphView: UIView {
     @IBInspectable
     var scale: CGFloat = 50 { didSet { setNeedsDisplay() }}
     var centerGraph: CGPoint = CGPoint(){ didSet { setNeedsDisplay() } }
-  //  var centerPoint:CGPoint {
-//        get {
-//            var centerPoint = centerGraph
-//            centerPoint.x += center.x
-//            centerPoint.y += center.y
-//            return centerPoint
-//        }
-//        set {
-//            var centerPoint = CGPoint()
-//            centerPoint.x -= center.x
-//            centerPoint.y -= center.y
-//            centerGraph = centerPoint
-//        }
-//    }
     
     func getPointX(column: CGFloat) -> CGFloat {
         var pointX: CGFloat = centerGraph.x + scale * column
@@ -50,22 +36,6 @@ class GraphView: UIView {
     override func drawRect(rect: CGRect) {
         drawAxis(rect)
         var graphHeigth: CGFloat = rect.maxX
-//        //Calc x
-//        var columnXPoint = { (column: Int) -> CGFloat in
-//            let spacer = (rect.width - self.scale * 2 - 4) / CGFloat((self.graphPoints.count))
-//            var x: CGFloat = CGFloat(column) * spacer
-//            x += self.scale + 2
-//            return x
-//        }
-//        
-        //Calx y
-//        let maxValue = maxElement(graphPoints)
-//        
-//        var columnYPoint = { (graphPoint:CGFloat) -> CGFloat in
-//            var y:CGFloat = CGFloat(graphPoint) / CGFloat(maxValue) * graphHeigth
-//            y = graphHeigth - y //Flip the graph
-//            return y
-//        }
         
         //Draw the line graph
         UIColor.blackColor().setFill()
