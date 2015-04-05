@@ -215,7 +215,7 @@ class CalculatorBrain {
     func setGraphViewPoints() -> [Double] {
         var graphPoints: [Double] = []
         for i in -50..<50 {
-            variableValues? = ["x": Double(i)]
+            variableValues? = ["x": Double(i)/10]
             var result = evaluate()
             graphPoints.append(result!)
         }

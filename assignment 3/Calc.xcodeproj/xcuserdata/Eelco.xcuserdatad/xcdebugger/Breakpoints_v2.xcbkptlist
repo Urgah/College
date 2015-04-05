@@ -154,7 +154,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Calc/GraphViewController.swift"
-            timestampString = "449759895.247628"
+            timestampString = "449798046.665619"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "18"
@@ -170,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Calc/GraphView.swift"
-            timestampString = "449758853.730365"
+            timestampString = "449929714.922414"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
             landmarkName = "drawRect(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -186,11 +186,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Calc/GraphView.swift"
-            timestampString = "449758853.730365"
+            timestampString = "449929714.922414"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
             landmarkName = "drawRect(_:)"
             landmarkType = "5">
          </BreakpointContent>
