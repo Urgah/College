@@ -15,11 +15,22 @@ class GraphView: UIView {
     
     @IBInspectable
     var scale: CGFloat = 50 { didSet { setNeedsDisplay() }}
+    var origin: CGPoint = CGPoint(x: 0, y:0)
+    var originSet: Bool = false
     var centerGraph: CGPoint = CGPoint(){
         didSet {
             setNeedsDisplay()
-            origin = centerGraph
+            if(!originSet) {
+                origin = centerGraph
+                originSet = true
+            }
         }
+    }
+    
+    var graphHeigth: CGFloat = 0
+    
+    func turnY(pointY: CGFloat) -> CGFloat {
+        return self.graphHeigth - pointY
     }
     
     func getPointX(column: CGFloat) -> CGFloat {
@@ -27,10 +38,10 @@ class GraphView: UIView {
         return pointX
     }
     
-    func getPointY(y: CGFloat, graphHeigth: CGFloat) -> CGFloat {
+    func getPointY(y: CGFloat) -> CGFloat {
         var pointY: CGFloat = centerGraph.y + y * scale
         //turn graph
-        pointY = graphHeigth - pointY
+        pointY = turnY(pointY)
         return pointY
     }
 
@@ -39,7 +50,7 @@ class GraphView: UIView {
             view.removeFromSuperview()
         }
         
-        var graphHeigth: CGFloat = rect.maxX
+        self.graphHeigth = rect.maxX
         drawAxis(rect)
         println("drawRect")
         
@@ -49,14 +60,14 @@ class GraphView: UIView {
         
         //Set up the points line
         var graphPath = UIBezierPath()
-        var point = CGPoint(x: getPointX(graphPoints[0].x), y: getPointY(graphPoints[0].y, graphHeigth: graphHeigth))
+        var point = CGPoint(x: getPointX(graphPoints[0].x), y: getPointY(graphPoints[0].y))
         
         //Go to start of line
         graphPath.moveToPoint(point)
         
         //Add (x,y) points
         for i in 1..<graphPoints.count {
-            let pointY: CGFloat = getPointY(CGFloat(graphPoints[i].y), graphHeigth: graphHeigth)
+            let pointY: CGFloat = getPointY(CGFloat(graphPoints[i].y))
             let nextPoint: CGPoint = CGPoint(x: getPointX(graphPoints[i].x), y: pointY)
             
             graphPath.addLineToPoint(nextPoint)
@@ -79,16 +90,19 @@ class GraphView: UIView {
         let screenWidth = screenSize.width
         let screenHeight = screenSize.height
         
+        if(!originSet) {
+            centerGraph = CGPoint(x: screenWidth/2, y: rect.midX)
+        }
+        
         //xmin tot xmax
-        graphPath.moveToPoint(CGPoint(x: 0, y: rect.midX))
-        graphPath.addLineToPoint(CGPoint(x: screenWidth, y: rect.midX))
+        graphPath.moveToPoint(CGPoint(x: 0, y: turnY(centerGraph.y)))
+        graphPath.addLineToPoint(CGPoint(x: screenWidth, y: turnY(centerGraph.y)))
         //ymin tot ymax
-        graphPath.moveToPoint(CGPoint(x: screenWidth/2, y: 0))
-        graphPath.addLineToPoint(CGPoint(x: screenWidth/2, y: screenHeight))
+        graphPath.moveToPoint(CGPoint(x: centerGraph.x, y: 0))
+        graphPath.addLineToPoint(CGPoint(x: centerGraph.x, y: screenHeight))
 
         graphPath.stroke()
         
-        centerGraph = CGPoint(x: screenWidth/2, y: rect.midX)
         drawAxisPoints(rect)
     }
     
@@ -99,7 +113,7 @@ class GraphView: UIView {
                 continue
             }
             
-            createLabelForAxis(CGPoint(x: centerGraph.x + scale*CGFloat(i), y: rect.midX + CGFloat(10)), number: i)
+            createLabelForAxis(CGPoint(x: centerGraph.x + scale*CGFloat(i), y: turnY(centerGraph.y + CGFloat(10))), number: i)
         }
         
         //Draw y axis
@@ -109,12 +123,12 @@ class GraphView: UIView {
                 continue
             }
 
-            createLabelForAxis(CGPoint(x: screenSize.width/2 + CGFloat(10), y: centerGraph.y + scale*CGFloat(i)), number: i * -1)
+            createLabelForAxis(CGPoint(x: centerGraph.x + CGFloat(10), y: turnY(centerGraph.y + scale*CGFloat(i))), number: i * -1)
         }
     }
     
     func createLabelForAxis(point: CGPoint, number: Int) {
-        var label = UILabel(frame: CGRectMake(point.x, point.y, scale, scale))
+        var label = UILabel(frame: CGRectMake(point.x, point.y, scale*2, scale*2))
         label.text = "\(number)"
         label.center = point
         label.textAlignment = NSTextAlignment.Center
@@ -135,18 +149,20 @@ class GraphView: UIView {
             case .Changed:
                 println("pan")
                 let translation = gesture.translationInView(self)
-//                origin.x += translation.x
-//                origin.y += translation.y
-//                gesture.setTranslation(CGPointZero, inView: self)
+                centerGraph.x += translation.x
+                centerGraph.y += translation.y
+                println("\(centerGraph)")
+                gesture.setTranslation(CGPointZero, inView: self)
             default: break
         }
     }
     
-    var origin: CGPoint = CGPoint(x: 0, y:0)
-    func moveCenter(gesture: UITapGestureRecognizer) {
+    func center(gesture: UITapGestureRecognizer) {
             println("double tab")
         if gesture.state == .Ended {
-            centerGraph = origin
+            var clickedPoint = gesture.locationInView(self)
+            var newPoint = CGPoint(x: clickedPoint.x, y: turnY(clickedPoint.y))
+            centerGraph = newPoint
         }
     }
 }

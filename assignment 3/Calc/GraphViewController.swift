@@ -14,7 +14,7 @@ class GraphViewController: UIViewController {
         didSet {
             graphView.addGestureRecognizer(UIPinchGestureRecognizer(target: graphView, action: "zoom:"))
             graphView.addGestureRecognizer(UIPanGestureRecognizer(target: graphView, action: "move:"))
-            var tap = UITapGestureRecognizer(target: graphView, action: "setCenter:")
+            var tap = UITapGestureRecognizer(target: graphView, action: "center:")
             tap.numberOfTapsRequired = 2
             graphView.addGestureRecognizer(tap)
         }
