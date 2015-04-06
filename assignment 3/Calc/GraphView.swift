@@ -123,7 +123,7 @@ class GraphView: UIView {
                 continue
             }
 
-            createLabelForAxis(CGPoint(x: centerGraph.x + CGFloat(10), y: turnY(centerGraph.y + scale*CGFloat(i))), number: i * -1)
+            createLabelForAxis(CGPoint(x: centerGraph.x + CGFloat(10), y: turnY(centerGraph.y + scale*CGFloat(i))), number: i)
         }
     }
     
