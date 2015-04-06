@@ -11,32 +11,37 @@ import UIKit
 
 @IBDesignable
 class GraphView: UIView {
-    
     var graphPoints: [CGPoint] = []
     
     @IBInspectable
     var scale: CGFloat = 50 { didSet { setNeedsDisplay() }}
-    var centerGraph: CGPoint = CGPoint(){ didSet { setNeedsDisplay() } }
+    var centerGraph: CGPoint = CGPoint(){
+        didSet {
+            setNeedsDisplay()
+            origin = centerGraph
+        }
+    }
     
     func getPointX(column: CGFloat) -> CGFloat {
         var pointX: CGFloat = centerGraph.x + scale * column
-//        println("pointx: \(pointX)")
         return pointX
     }
     
     func getPointY(y: CGFloat, graphHeigth: CGFloat) -> CGFloat {
         var pointY: CGFloat = centerGraph.y + y * scale
-     //   println("pointy: \(pointY)")
         //turn graph
         pointY = graphHeigth - pointY
-  //      println("pointy2: \(pointY)")
         return pointY
     }
 
     override func drawRect(rect: CGRect) {
-        drawAxis(rect)
-                println("centergraph point: \(centerGraph)")
+        for view in self.subviews {
+            view.removeFromSuperview()
+        }
+        
         var graphHeigth: CGFloat = rect.maxX
+        drawAxis(rect)
+        println("drawRect")
         
         //Draw the line graph
         UIColor.blackColor().setFill()
@@ -44,34 +49,25 @@ class GraphView: UIView {
         
         //Set up the points line
         var graphPath = UIBezierPath()
-        
-        //var point = CGPointMake(CGFloat(getPointX(0)), getPointY(CGFloat(graphPoints[0]), graphHeigth: graphHeigth))
         var point = CGPoint(x: getPointX(graphPoints[0].x), y: getPointY(graphPoints[0].y, graphHeigth: graphHeigth))
+        
         //Go to start of line
         graphPath.moveToPoint(point)
         
         //Add (x,y) points 
         for i in 1..<graphPoints.count {
-            var pointY: CGFloat = getPointY(CGFloat(graphPoints[i].y), graphHeigth: graphHeigth)
-                println("POINT i: \(graphPoints[i])")
+            let pointY: CGFloat = getPointY(CGFloat(graphPoints[i].y), graphHeigth: graphHeigth)
             let nextPoint: CGPoint = CGPoint(x: getPointX(graphPoints[i].x), y: pointY)
             
             graphPath.addLineToPoint(nextPoint)
         }
         
         graphPath.stroke()
-        self.setNeedsDisplay()
     }
     
     func setGraphPoints(graphList: [CGPoint]) {
-//        var internGraphPoints: [CGPoint] = []
-//        for i in 0..<graphList.count {
-//            internGraphPoints.append(CGPoint(x: graphList[i].x * scale, y: graphList[i].y * scale))
-//        }
-        
         self.graphPoints = graphList
     }
-    
     
     //Draw axis from here
     func drawAxis(rect: CGRect) {
@@ -89,6 +85,7 @@ class GraphView: UIView {
         //ymin tot ymax
         graphPath.moveToPoint(CGPoint(x: screenWidth/2, y: 0))
         graphPath.addLineToPoint(CGPoint(x: screenWidth/2, y: screenHeight))
+
         graphPath.stroke()
         
         centerGraph = CGPoint(x: screenWidth/2, y: rect.midX)
@@ -97,8 +94,8 @@ class GraphView: UIView {
     
     func drawAxisPoints(rect: CGRect) {
         //Draw x axis
-        for i in -7..<7 {
-            if (i==0) {
+        for i in -50..<50 {
+            if (i==0 || i % 2 == 0) {
                 continue
             }
             
@@ -107,14 +104,13 @@ class GraphView: UIView {
         
         //Draw y axis
         let screenSize: CGRect = UIScreen.mainScreen().bounds
-        for i in -7..<7 {
-            if (i==0) {
+        for i in -50..<50 {
+            if (i == 0 || i % 2 == 0) {
                 continue
             }
-            
+
             createLabelForAxis(CGPoint(x: screenSize.width/2 + CGFloat(10), y: centerGraph.y + scale*CGFloat(i)), number: i * -1)
         }
-        
     }
     
     func createLabelForAxis(point: CGPoint, number: Int) {
@@ -125,4 +121,32 @@ class GraphView: UIView {
         self.addSubview(label)
     }
     
+    func zoom(gesture: UIPinchGestureRecognizer) {
+        println("zoom")
+        if gesture.state == .Changed {
+            scale *= gesture.scale
+            gesture.scale = 1.0
+        }
+    }
+    
+    func move(gesture: UIPanGestureRecognizer) {
+        switch gesture.state {
+            case .Ended: fallthrough
+            case .Changed:
+                println("pan")
+                let translation = gesture.translationInView(self)
+//                origin.x += translation.x
+//                origin.y += translation.y
+//                gesture.setTranslation(CGPointZero, inView: self)
+            default: break
+        }
+    }
+    
+    var origin: CGPoint = CGPoint(x: 0, y:0)
+    func moveCenter(gesture: UITapGestureRecognizer) {
+            println("double tab")
+        if gesture.state == .Ended {
+            centerGraph = origin
+        }
+    }
 }

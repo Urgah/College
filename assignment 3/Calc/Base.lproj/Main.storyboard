@@ -262,7 +262,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="hqc-YH-U7Z" kind="show" identifier="to graph" id="HTU-Wx-1yC"/>
+                                    <segue destination="hqc-YH-U7Z" kind="showDetail" identifier="to graph" id="HTU-Wx-1yC"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uVj-uD-e9d">
@@ -293,7 +293,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ydI-Xu-1MP">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ydI-Xu-1MP">
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -476,14 +476,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QTO-6k-XaI" customClass="GraphView" customModule="Calc" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="70" width="600" height="550"/>
+                            <view contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="QTO-6k-XaI" customClass="GraphView" customModule="Calc" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="70" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="QTO-6k-XaI" firstAttribute="leading" secondItem="JWb-1M-bcw" secondAttribute="leading" id="4st-GA-rkK"/>
+                            <constraint firstAttribute="height" secondItem="QTO-6k-XaI" secondAttribute="height" id="Epz-1o-aSx"/>
+                            <constraint firstAttribute="width" secondItem="QTO-6k-XaI" secondAttribute="width" id="XHt-qR-1Sx"/>
+                            <constraint firstItem="QTO-6k-XaI" firstAttribute="top" secondItem="fk8-Xt-AZs" secondAttribute="bottom" constant="6" id="ume-gv-dCP"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="WHe-OS-Dqv"/>
                     <connections>
@@ -492,7 +498,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aAS-qd-xRD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2434" y="1479"/>
+            <point key="canvasLocation" x="2434" y="1460"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="xrq-Ws-8XB">
@@ -532,6 +538,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="uYG-hQ-VOy"/>
+        <segue reference="HTU-Wx-1yC"/>
     </inferredMetricsTieBreakers>
 </document>

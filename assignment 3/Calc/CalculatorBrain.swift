@@ -210,21 +210,10 @@ class CalculatorBrain {
         
         return ", "
     }
-//    
-//    func setGraphViewPoints() -> [Double] {
-//        var graphPoints: [Double] = []
-//        for i in -50..<50 {
-//            variableValues? = ["x": Double(i)/10]
-//            var result = evaluate()
-//            graphPoints.append(result!)
-//        }
-//        
-//        return graphPoints
-//    }
     
     func setGraphViewPoints() -> [CGPoint] {
         var graphPoints: [CGPoint] = []
-        for i in -40..<40 {
+        for i in -200..<200 {
             var float: Double = Double(i)
             float = float/10
             variableValues? = ["x": float]
