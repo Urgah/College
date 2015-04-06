@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class CalculatorBrain {
     private var opStack = [Op]()
@@ -106,8 +107,6 @@ class CalculatorBrain {
     
     func evaluate() -> Double? {
         let (result, remainder) = evaluate(opStack)
-        println("\(opStack) = \(result) with \(remainder) left over")
-        
         if variableValues == nil && checkOpstack(){
             return nil
         }
@@ -211,13 +210,29 @@ class CalculatorBrain {
         
         return ", "
     }
+//    
+//    func setGraphViewPoints() -> [Double] {
+//        var graphPoints: [Double] = []
+//        for i in -50..<50 {
+//            variableValues? = ["x": Double(i)/10]
+//            var result = evaluate()
+//            graphPoints.append(result!)
+//        }
+//        
+//        return graphPoints
+//    }
     
-    func setGraphViewPoints() -> [Double] {
-        var graphPoints: [Double] = []
-        for i in -50..<50 {
-            variableValues? = ["x": Double(i)/10]
+    func setGraphViewPoints() -> [CGPoint] {
+        var graphPoints: [CGPoint] = []
+        for i in -40..<40 {
+            var float: Double = Double(i)
+            float = float/10
+            variableValues? = ["x": float]
             var result = evaluate()
-            graphPoints.append(result!)
+            var x: CGFloat = CGFloat(float)
+            var y: CGFloat = CGFloat(result!)
+            var point: CGPoint = CGPoint(x: x, y: y)
+            graphPoints.append(point)
         }
         
         return graphPoints

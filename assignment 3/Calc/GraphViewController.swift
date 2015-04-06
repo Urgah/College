@@ -11,7 +11,7 @@ import UIKit
 
 class GraphViewController: UIViewController {
     @IBOutlet weak var graphView: GraphView!
-    var points: [Double] = [0, 1, 2, 3, 4, 5]
+    var points: [CGPoint] = [CGPoint(x: 0, y: 0), CGPoint(x: 1, y: 1), CGPoint(x: 2, y: 2), CGPoint(x: 3, y: 3)]
     override func viewDidLoad() {
         super.viewDidLoad()
         graphView.setGraphPoints(points)

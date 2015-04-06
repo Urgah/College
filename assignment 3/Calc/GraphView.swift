@@ -12,7 +12,7 @@ import UIKit
 @IBDesignable
 class GraphView: UIView {
     
-    var graphPoints: [CGFloat] = []
+    var graphPoints: [CGPoint] = []
     
     @IBInspectable
     var scale: CGFloat = 50 { didSet { setNeedsDisplay() }}
@@ -20,21 +20,22 @@ class GraphView: UIView {
     
     func getPointX(column: CGFloat) -> CGFloat {
         var pointX: CGFloat = centerGraph.x + scale * column
+//        println("pointx: \(pointX)")
         return pointX
     }
     
     func getPointY(y: CGFloat, graphHeigth: CGFloat) -> CGFloat {
         var pointY: CGFloat = centerGraph.y + y * scale
-        println("\(pointY)")
+     //   println("pointy: \(pointY)")
+        //turn graph
         pointY = graphHeigth - pointY
-        println("\(pointY)")
+  //      println("pointy2: \(pointY)")
         return pointY
     }
 
-
-    
     override func drawRect(rect: CGRect) {
         drawAxis(rect)
+                println("centergraph point: \(centerGraph)")
         var graphHeigth: CGFloat = rect.maxX
         
         //Draw the line graph
@@ -44,16 +45,17 @@ class GraphView: UIView {
         //Set up the points line
         var graphPath = UIBezierPath()
         
-        var point = CGPointMake(CGFloat(getPointX(0)), getPointY(CGFloat(graphPoints[0]), graphHeigth: graphHeigth))
+        //var point = CGPointMake(CGFloat(getPointX(0)), getPointY(CGFloat(graphPoints[0]), graphHeigth: graphHeigth))
+        var point = CGPoint(x: getPointX(graphPoints[0].x), y: getPointY(graphPoints[0].y, graphHeigth: graphHeigth))
         //Go to start of line
         graphPath.moveToPoint(point)
         
         //Add (x,y) points 
         for i in 1..<graphPoints.count {
-            var pointY: CGFloat = getPointY(CGFloat(graphPoints[i]), graphHeigth: graphHeigth)
+            var pointY: CGFloat = getPointY(CGFloat(graphPoints[i].y), graphHeigth: graphHeigth)
+                println("POINT i: \(graphPoints[i])")
+            let nextPoint: CGPoint = CGPoint(x: getPointX(graphPoints[i].x), y: pointY)
             
-            let nextPoint: CGPoint = CGPointMake(getPointX(CGFloat(i)), pointY)
-
             graphPath.addLineToPoint(nextPoint)
         }
         
@@ -61,13 +63,13 @@ class GraphView: UIView {
         self.setNeedsDisplay()
     }
     
-    func setGraphPoints(graphList: [Double]) {
-        var internGraphPoints: [CGFloat] = []
-        for i in 0..<graphList.count {
-            internGraphPoints.append(CGFloat(graphList[i]))
-        }
+    func setGraphPoints(graphList: [CGPoint]) {
+//        var internGraphPoints: [CGPoint] = []
+//        for i in 0..<graphList.count {
+//            internGraphPoints.append(CGPoint(x: graphList[i].x * scale, y: graphList[i].y * scale))
+//        }
         
-        self.graphPoints = internGraphPoints;
+        self.graphPoints = graphList
     }
     
     
