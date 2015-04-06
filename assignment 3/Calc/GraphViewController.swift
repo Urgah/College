@@ -20,7 +20,7 @@ class GraphViewController: UIViewController {
         }
     }
     
-    var points: [CGPoint] = [CGPoint(x: 0, y: 0), CGPoint(x: 1, y: 1), CGPoint(x: 2, y: 2), CGPoint(x: 3, y: 3)]
+    var points: [CGPoint] = [CGPoint(x: 0, y: 0), CGPoint(x: 0, y: 0)]
     override func viewDidLoad() {
         super.viewDidLoad()
         graphView.setGraphPoints(points)
