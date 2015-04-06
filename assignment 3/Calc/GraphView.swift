@@ -8,10 +8,14 @@
 
 import UIKit
 
+protocol graphData: class {
+    func setData(pointArray: [CGPoint]) -> [CGPoint]
+}
 
 @IBDesignable
 class GraphView: UIView {
     var graphPoints: [CGPoint] = []
+    //var graphPoints: graphData?
     
     @IBInspectable
     var scale: CGFloat = 50 { didSet { setNeedsDisplay() }}
@@ -79,7 +83,7 @@ class GraphView: UIView {
     func setGraphPoints(graphList: [CGPoint]) {
         self.graphPoints = graphList
     }
-    
+
     //Draw axis from here
     func drawAxis(rect: CGRect) {
         var graphPath = UIBezierPath()
@@ -150,8 +154,8 @@ class GraphView: UIView {
                 println("pan")
                 let translation = gesture.translationInView(self)
                 centerGraph.x += translation.x
-                centerGraph.y += translation.y
-                println("\(centerGraph)")
+                // - because when you move up you want the x-axis to go down to have the same behaviour as in the browser
+                centerGraph.y -= translation.y
                 gesture.setTranslation(CGPointZero, inView: self)
             default: break
         }
