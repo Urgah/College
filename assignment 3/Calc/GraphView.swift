@@ -22,15 +22,19 @@ class GraphView: UIView {
         }
     }
     
+    var xMid: CGFloat = 0
+    var yMid: CGFloat = 0
+    var graphHeigth: CGFloat = 0
+    
     func getPointX(column: CGFloat) -> CGFloat {
         var pointX: CGFloat = centerGraph.x + scale * column
         return pointX
     }
     
-    func getPointY(y: CGFloat, graphHeigth: CGFloat) -> CGFloat {
+    func getPointY(y: CGFloat) -> CGFloat {
         var pointY: CGFloat = centerGraph.y + y * scale
         //turn graph
-        pointY = graphHeigth - pointY
+        pointY = self.graphHeigth - pointY
         return pointY
     }
 
@@ -39,7 +43,10 @@ class GraphView: UIView {
             view.removeFromSuperview()
         }
         
-        var graphHeigth: CGFloat = rect.maxX
+        self.xMid = rect.midX
+        self.yMid = rect.midY
+        self.graphHeigth = rect.maxX
+        
         drawAxis(rect)
         println("drawRect")
         
@@ -49,14 +56,14 @@ class GraphView: UIView {
         
         //Set up the points line
         var graphPath = UIBezierPath()
-        var point = CGPoint(x: getPointX(graphPoints[0].x), y: getPointY(graphPoints[0].y, graphHeigth: graphHeigth))
+        var point = CGPoint(x: getPointX(graphPoints[0].x), y: getPointY(graphPoints[0].y))
         
         //Go to start of line
         graphPath.moveToPoint(point)
         
         //Add (x,y) points 
         for i in 1..<graphPoints.count {
-            let pointY: CGFloat = getPointY(CGFloat(graphPoints[i].y), graphHeigth: graphHeigth)
+            let pointY: CGFloat = getPointY(CGFloat(graphPoints[i].y))
             let nextPoint: CGPoint = CGPoint(x: getPointX(graphPoints[i].x), y: pointY)
             
             graphPath.addLineToPoint(nextPoint)
@@ -80,15 +87,16 @@ class GraphView: UIView {
         let screenHeight = screenSize.height
         
         //xmin tot xmax
-        graphPath.moveToPoint(CGPoint(x: 0, y: rect.midX))
-        graphPath.addLineToPoint(CGPoint(x: screenWidth, y: rect.midX))
+        graphPath.moveToPoint(CGPoint(x: 0, y: self.xMid))
+        graphPath.addLineToPoint(CGPoint(x: screenWidth, y: self.xMid))
         //ymin tot ymax
-        graphPath.moveToPoint(CGPoint(x: screenWidth/2, y: 0))
-        graphPath.addLineToPoint(CGPoint(x: screenWidth/2, y: screenHeight))
+        graphPath.moveToPoint(CGPoint(x: self.yMid, y: 0))
+        graphPath.addLineToPoint(CGPoint(x: self.yMid, y: rect.maxY))
 
         graphPath.stroke()
         
-        centerGraph = CGPoint(x: screenWidth/2, y: rect.midX)
+        centerGraph = CGPoint(x: self.xMid, y: selfyMid)
+        println("centergraph \(centerGraph)")
         drawAxisPoints(rect)
     }
     
@@ -99,7 +107,7 @@ class GraphView: UIView {
                 continue
             }
             
-            createLabelForAxis(CGPoint(x: centerGraph.x + scale*CGFloat(i), y: rect.midX + CGFloat(10)), number: i)
+            createLabelForAxis(CGPoint(x: centerGraph.x + scale*CGFloat(i), y: self.xMid + CGFloat(10)), number: i)
         }
         
         //Draw y axis
@@ -109,7 +117,7 @@ class GraphView: UIView {
                 continue
             }
 
-            createLabelForAxis(CGPoint(x: screenSize.width/2 + CGFloat(10), y: centerGraph.y + scale*CGFloat(i)), number: i * -1)
+            createLabelForAxis(CGPoint(x: xMid + CGFloat(10), y: centerGraph.y + scale*CGFloat(i)), number: i * -1)
         }
     }
     
@@ -146,7 +154,8 @@ class GraphView: UIView {
     func moveCenter(gesture: UITapGestureRecognizer) {
             println("double tab")
         if gesture.state == .Ended {
-            centerGraph = origin
+            //works? Internet says so. cant test it cause panning doesnt work
+            centerGraph = gesture.locationInView(self)
         }
     }
 }
