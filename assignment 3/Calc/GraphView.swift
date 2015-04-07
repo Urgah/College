@@ -8,14 +8,14 @@
 
 import UIKit
 
-protocol graphData: class {
-    func setData(pointArray: [CGPoint]) -> [CGPoint]
+protocol GraphData: class {
+    func getData(sender:GraphView) -> [CGPoint]
 }
 
 @IBDesignable
 class GraphView: UIView {
-    var graphPoints: [CGPoint] = []
-    //var graphPoints: graphData?
+    //var graphPoints: [CGPoint] = []
+    weak var graphData: GraphData?
     
     @IBInspectable
     var scale: CGFloat = 50 { didSet { setNeedsDisplay() }}
@@ -62,26 +62,24 @@ class GraphView: UIView {
         UIColor.blackColor().setFill()
         UIColor.blackColor().setStroke()
         
-        //Set up the points line
-        var graphPath = UIBezierPath()
-        var point = CGPoint(x: getPointX(graphPoints[0].x), y: getPointY(graphPoints[0].y))
+        if var graphPoints = graphData?.getData(self) {
+            //Set up the points line
+            var graphPath = UIBezierPath()
+            var point = CGPoint(x: getPointX(graphPoints[0].x), y: getPointY(graphPoints[0].y))
         
-        //Go to start of line
-        graphPath.moveToPoint(point)
+            //Go to start of line
+            graphPath.moveToPoint(point)
         
-        //Add (x,y) points
-        for i in 1..<graphPoints.count {
-            let pointY: CGFloat = getPointY(CGFloat(graphPoints[i].y))
-            let nextPoint: CGPoint = CGPoint(x: getPointX(graphPoints[i].x), y: pointY)
+            //Add (x,y) points
+            for i in 1..<graphPoints.count {
+                let pointY: CGFloat = getPointY(CGFloat(graphPoints[i].y))
+                let nextPoint: CGPoint = CGPoint(x: getPointX(graphPoints[i].x), y: pointY)
             
-            graphPath.addLineToPoint(nextPoint)
-        }
+                graphPath.addLineToPoint(nextPoint)
+            }
         
-        graphPath.stroke()
-    }
-    
-    func setGraphPoints(graphList: [CGPoint]) {
-        self.graphPoints = graphList
+            graphPath.stroke()
+        }
     }
 
     //Draw axis from here

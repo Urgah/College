@@ -9,7 +9,7 @@
 import UIKit
 
 
-class GraphViewController: UIViewController {
+class GraphViewController: UIViewController, GraphData {
     @IBOutlet weak var graphView: GraphView! {
         didSet {
             graphView.addGestureRecognizer(UIPinchGestureRecognizer(target: graphView, action: "zoom:"))
@@ -21,9 +21,14 @@ class GraphViewController: UIViewController {
     }
     
     var points: [CGPoint] = [CGPoint(x: 0, y: 0), CGPoint(x: 0, y: 0)]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        graphView.setGraphPoints(points)
+        graphView.graphData = self
+    }
+    
+    func getData(sender: GraphView) -> [CGPoint] {
+        return points
     }
     
     override func didReceiveMemoryWarning() {
