@@ -14,7 +14,6 @@ protocol GraphData: class {
 
 @IBDesignable
 class GraphView: UIView {
-    //var graphPoints: [CGPoint] = []
     weak var graphData: GraphData?
     
     @IBInspectable
@@ -56,7 +55,6 @@ class GraphView: UIView {
         
         self.graphHeigth = rect.maxX
         drawAxis(rect)
-        println("drawRect")
         
         //Draw the line graph
         UIColor.blackColor().setFill()
@@ -138,7 +136,6 @@ class GraphView: UIView {
     }
     
     func zoom(gesture: UIPinchGestureRecognizer) {
-        println("zoom")
         if gesture.state == .Changed {
             scale *= gesture.scale
             gesture.scale = 1.0
@@ -149,7 +146,6 @@ class GraphView: UIView {
         switch gesture.state {
             case .Ended: fallthrough
             case .Changed:
-                println("pan")
                 let translation = gesture.translationInView(self)
                 centerGraph.x += translation.x
                 // - because when you move up you want the x-axis to go down to have the same behaviour as in the browser
@@ -160,7 +156,6 @@ class GraphView: UIView {
     }
     
     func center(gesture: UITapGestureRecognizer) {
-            println("double tab")
         if gesture.state == .Ended {
             var clickedPoint = gesture.locationInView(self)
             var newPoint = CGPoint(x: clickedPoint.x, y: turnY(clickedPoint.y))
