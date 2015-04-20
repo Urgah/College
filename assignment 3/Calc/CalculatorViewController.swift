@@ -107,7 +107,7 @@ class CalculatorViewController : UIViewController
                 return nil
             }
             
-            if display.text? == "π" {
+            if display.text == "π" {
                 display.text? = "\(M_PI)"
             }
             

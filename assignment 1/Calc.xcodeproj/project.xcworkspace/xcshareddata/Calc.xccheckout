@@ -12,20 +12,24 @@
 	<dict>
 		<key>04FE0AD680A6C80DCF92FBF02FD6B0F8F8A2BA9D</key>
 		<string>https://github.com/Urgah/MAD-Assignment1.git</string>
+		<key>2CE62ED932107987B1DBB9915D507000E048CBB0</key>
+		<string>https://github.com/HANICA/MAD-student-EelcoWagenaar.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>assignment 1/Calc.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>04FE0AD680A6C80DCF92FBF02FD6B0F8F8A2BA9D</key>
+		<string>../../../../MAD-Assignment1</string>
+		<key>2CE62ED932107987B1DBB9915D507000E048CBB0</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/Urgah/MAD-Assignment1.git</string>
+	<string>https://github.com/HANICA/MAD-student-EelcoWagenaar.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>04FE0AD680A6C80DCF92FBF02FD6B0F8F8A2BA9D</string>
+	<string>2CE62ED932107987B1DBB9915D507000E048CBB0</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
@@ -35,6 +39,14 @@
 			<string>04FE0AD680A6C80DCF92FBF02FD6B0F8F8A2BA9D</string>
 			<key>IDESourceControlWCCName</key>
 			<string>MAD-Assignment1</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>2CE62ED932107987B1DBB9915D507000E048CBB0</string>
+			<key>IDESourceControlWCCName</key>
+			<string>MAD-student-EelcoWagenaar</string>
 		</dict>
 	</array>
 </dict>
