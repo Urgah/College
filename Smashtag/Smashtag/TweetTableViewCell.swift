@@ -31,7 +31,25 @@ class TweetTableViewCell: UITableViewCell
         // load new information from our tweet (if any)
         if let tweet = self.tweet
         {
-            tweetTextLabel?.text = tweet.text
+           // tweetTextLabel?.text = tweet.text
+            
+            var attributeText = NSMutableAttributedString(string: tweet.text)
+            for hashtag in tweet.hashtags {
+                attributeText.addAttribute(NSForegroundColorAttributeName, value: UIColor.redColor(), range: hashtag.nsrange)
+            }
+            
+            for url in tweet.urls {
+                attributeText.addAttribute(NSForegroundColorAttributeName, value: UIColor.blueColor(), range: url.nsrange)
+            }
+            
+            // @
+            for user in tweet.userMentions {
+                attributeText.addAttribute(NSForegroundColorAttributeName, value: UIColor.greenColor(), range: user.nsrange)
+            }
+            
+            //set label to attributed text
+            tweetTextLabel?.attributedText = attributeText
+            
             if tweetTextLabel?.text != nil  {
                 for _ in tweet.media {
                     tweetTextLabel.text! += " 📷"
