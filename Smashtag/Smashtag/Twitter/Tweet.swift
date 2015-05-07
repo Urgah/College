@@ -75,8 +75,7 @@ public class Tweet : Printable
             if let text = data?.valueForKeyPath(TwitterKey.Text) as? String {
                 self.text = text
                 var testTw = data?.valueForKeyPath(TwitterKey.Created) as? String
-                println(testTw)
-                println((testTw)?.asTwitterDate)
+                //println((testTw)?.asTwitterDate)
                 
                 if let created = (data?.valueForKeyPath(TwitterKey.Created) as? String)?.asTwitterDate {
                     self.created = created
@@ -163,7 +162,6 @@ private extension String {
             dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX") // JK: added to solve "nil" problem
             dateFormatter.dateFormat = "EEE MMM dd HH:mm:ss Z yyyy"
             var formattedString = dateFormatter.dateFromString(self)
-            //println("Formatted:\(formattedString)")
             return formattedString
         }
     }

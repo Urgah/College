@@ -216,7 +216,7 @@ public class TwitterRequest
     // debug println with identifying prefix
     
     private func log(whatToLog: AnyObject) {
-        debugPrintln("TwitterRequest: \(whatToLog)")
+     //   debugPrintln("TwitterRequest: \(whatToLog)")
     }
     
     // synchronizes access to self across multiple threads

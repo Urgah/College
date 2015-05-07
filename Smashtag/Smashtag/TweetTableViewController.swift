@@ -124,6 +124,18 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate
 
         return cell
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let identifier = segue.identifier {
+            if identifier == "tweetClicked" {
+                if let stvc = segue.destinationViewController as? SingleTweetViewController {
+                    if let tweetCell = sender as? TweetTableViewCell {
+                        stvc.tweetCell = tweetCell
+                    }
+                }
+            }
+        }
+    }
 
     /*
     // Override to support conditional editing of the table view.

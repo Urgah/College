@@ -8,5 +8,13 @@
 import UIKit
 
 class SingleTweetViewController: UITableViewController {
+    var tweetCell: TweetTableViewCell?
 
-}
+    override func viewDidLoad() {
+
+        let cell = tableView.dequeueReusableCellWithIdentifier("Tweet") as! SingleTweetView
+        
+        cell.tweetCell = tweetCell
+        
+    }
+ }

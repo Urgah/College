@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		496E9C111AFACE4800E61C64 /* SingleTweetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496E9C101AFACE4800E61C64 /* SingleTweetView.swift */; };
 		49E12D7D1AF7BF9600BD8B83 /* SingleTweetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E12D7C1AF7BF9600BD8B83 /* SingleTweetViewController.swift */; };
 		EC6876171A898EF4006B5FDB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6876161A898EF4006B5FDB /* AppDelegate.swift */; };
 		EC68761C1A898EF4006B5FDB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC68761A1A898EF4006B5FDB /* Main.storyboard */; };
@@ -32,6 +33,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		496E9C101AFACE4800E61C64 /* SingleTweetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleTweetView.swift; sourceTree = "<group>"; };
 		49E12D7C1AF7BF9600BD8B83 /* SingleTweetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleTweetViewController.swift; sourceTree = "<group>"; };
 		EC6876111A898EF4006B5FDB /* Smashtag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Smashtag.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC6876151A898EF4006B5FDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 				EC6876381A898FC6006B5FDB /* Twitter */,
 				EC6876141A898EF4006B5FDB /* Supporting Files */,
 				49E12D7C1AF7BF9600BD8B83 /* SingleTweetViewController.swift */,
+				496E9C101AFACE4800E61C64 /* SingleTweetView.swift */,
 			);
 			path = Smashtag;
 			sourceTree = "<group>";
@@ -187,7 +190,7 @@
 				TargetAttributes = {
 					EC6876101A898EF4006B5FDB = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = 27GCJXK92K;
+						DevelopmentTeam = 6BSBW655NT;
 					};
 					EC6876251A898EF4006B5FDB = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -240,6 +243,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC6876171A898EF4006B5FDB /* AppDelegate.swift in Sources */,
+				496E9C111AFACE4800E61C64 /* SingleTweetView.swift in Sources */,
 				EC68763F1A898FC6006B5FDB /* TwitterRequest.swift in Sources */,
 				EC6876401A898FC6006B5FDB /* User.swift in Sources */,
 				EC6876371A898F4D006B5FDB /* TweetTableViewController.swift in Sources */,
@@ -373,8 +377,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Smashtag/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
@@ -384,8 +390,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Smashtag/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 			};
 			name = Release;
 		};
