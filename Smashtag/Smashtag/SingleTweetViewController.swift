@@ -63,20 +63,23 @@ class SingleTweetViewController: UITableViewController {
     let textCellIdentifier = "Tweet"
     let imageCellIdentifier = "Image"
     let mentionCellIdentier = "searchTwitter"
+    let imageViewCellIdentifier = "imageClicked"
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    // MARK:  UITextFieldDelegate Methods
+    //Task 2
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return mentions.count
     }
     
+    //Task 2
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return mentions[section].data.count
     }
     
+    //Task 2
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let mention = mentions[indexPath.section].data[indexPath.row]
         switch mention {
@@ -91,11 +94,7 @@ class SingleTweetViewController: UITableViewController {
         }
     }
     
-    //Task 3
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String {
-        return mentions[section].title
-    }
-    
+    //Task 2
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let mention = mentions[indexPath.section].data[indexPath.row]
         switch mention {
@@ -106,8 +105,14 @@ class SingleTweetViewController: UITableViewController {
         }
     }
     
+    //Task 2
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
+    //Task 3
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String {
+        return mentions[section].title
     }
     
     //task 5
@@ -119,8 +124,34 @@ class SingleTweetViewController: UITableViewController {
                         ttvc.searchText = cell.tweetTextLabel.text
                     }
                 }
+            } //task 7
+            else if identifier == imageViewCellIdentifier {
+                if let ivc = segue.destinationViewController as? TweetImageViewController {
+                    if let cell = sender as? SingleTweetView {
+                        ivc.title = title
+                        ivc.imageUrl = cell.imageUrl
+                    }
+                }
             }
         }
+
+    }
+    
+    //task 6
+    override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
+        if identifier == mentionCellIdentier {
+            if let cell = sender as? SingleTweetView {
+                if let url = cell.tweetTextLabel.text {
+                    if url.hasPrefix("http") {
+                        var nsUrl: NSURL = NSURL(string: url)!
+                        UIApplication.sharedApplication().openURL(nsUrl)
+                        return false
+                    }
+                }
+            }
+        }
+        
+        return true
     }
 
  }
