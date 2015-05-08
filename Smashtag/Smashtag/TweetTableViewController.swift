@@ -130,7 +130,7 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate
             if identifier == "tweetClicked" {
                 if let stvc = segue.destinationViewController as? SingleTweetViewController {
                     if let tweetCell = sender as? TweetTableViewCell {
-                        stvc.tweetCell = tweetCell
+                        stvc.tweet = tweetCell.tweet
                     }
                 }
             }

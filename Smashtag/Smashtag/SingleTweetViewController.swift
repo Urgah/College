@@ -8,13 +8,105 @@
 import UIKit
 
 class SingleTweetViewController: UITableViewController {
-    var tweetCell: TweetTableViewCell?
 
-    override func viewDidLoad() {
-
-        let cell = tableView.dequeueReusableCellWithIdentifier("Tweet") as! SingleTweetView
-        
-        cell.tweetCell = tweetCell
-        
+    var tweet: Tweet? {
+        didSet {
+            title = tweet?.user.screenName
+            if let media = tweet?.media {
+                //task 4
+                if media.count > 0 {
+                mentions.append(Mentions(title: "Images",
+                    data: media.map { MentionItem.Image($0.url, $0.aspectRatio) }))
+                }
+            }
+            if let urls = tweet?.urls {
+                if urls.count > 0 {
+                    mentions.append(Mentions(title: "URLs",
+                        data: urls.map { MentionItem.Keyword($0.keyword) }))
+                }
+            }
+            if let hashtags = tweet?.hashtags {
+                if hashtags.count > 0 {
+                    mentions.append(Mentions(title: "Hashtags",
+                        data: hashtags.map { MentionItem.Keyword($0.keyword) }))
+                }
+            }
+            if let users = tweet?.userMentions {
+                if users.count > 0 {
+                    mentions.append(Mentions(title: "Users",
+                        data: users.map { MentionItem.Keyword($0.keyword) }))
+                }
+            }
+        }
     }
+    
+    var mentions: [Mentions] = []
+    struct Mentions: Printable
+    {
+        var title: String
+        var data: [MentionItem]
+        var description: String { return "\(title): \(data)" }
+    }
+    
+    enum MentionItem: Printable
+    {
+        case Keyword(String)
+        case Image(NSURL, Double)
+        var description: String {
+            switch self {
+            case .Keyword(let keyword): return keyword
+            case .Image(let url, _): return url.path!
+            }
+        }
+    }
+
+    let textCellIdentifier = "Tweet"
+    let imageCellIdentifier = "Image"
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
+    // MARK:  UITextFieldDelegate Methods
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return mentions.count
+    }
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return mentions[section].data.count
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let mention = mentions[indexPath.section].data[indexPath.row]
+        switch mention {
+        case .Keyword(let tweetText):
+            let cell = tableView.dequeueReusableCellWithIdentifier(textCellIdentifier, forIndexPath: indexPath) as! SingleTweetView
+            cell.tweetTextLabel.text = tweetText
+            return cell
+        case .Image(let url, let ratio):
+            let cell = tableView.dequeueReusableCellWithIdentifier(imageCellIdentifier, forIndexPath: indexPath) as! SingleTweetView
+            cell.imageUrl = url
+            return cell
+        }
+    }
+    
+    //Task 3
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String {
+        return mentions[section].title
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        let mention = mentions[indexPath.section].data[indexPath.row]
+        switch mention {
+        case .Image(_, let ratio):
+            return tableView.bounds.size.width / CGFloat(ratio)
+        default:
+            return UITableViewAutomaticDimension
+        }
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+
  }
