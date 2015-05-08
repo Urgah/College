@@ -177,12 +177,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L6F-wy-hDJ">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="L6F-wy-hDJ">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="L6F-wy-hDJ" secondAttribute="trailing" id="0kf-DW-pcq"/>
+                            <constraint firstItem="L6F-wy-hDJ" firstAttribute="bottom" secondItem="mDR-7c-5NO" secondAttribute="top" id="3F5-iS-Pug"/>
+                            <constraint firstItem="L6F-wy-hDJ" firstAttribute="leading" secondItem="EoL-89-N7i" secondAttribute="leadingMargin" constant="-16" id="rcM-GN-se4"/>
+                            <constraint firstItem="L6F-wy-hDJ" firstAttribute="top" secondItem="EoL-89-N7i" secondAttribute="top" id="yHK-gi-CT8"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="imageView" destination="L6F-wy-hDJ" id="Fm4-zu-vVX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LlE-lc-phw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
