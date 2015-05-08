@@ -124,6 +124,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="tweetTextLabel" destination="s5n-oo-uXB" id="mh4-On-fnf"/>
+                                    <segue destination="MxJ-wT-guP" kind="show" identifier="searchTwitter" id="TgD-fP-OmP"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Image" rowHeight="219" id="rzu-8g-xAS" customClass="SingleTweetView" customModule="Smashtag" customModuleProvider="target">
@@ -182,4 +183,7 @@
             <point key="canvasLocation" x="-1331" y="238"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="TgD-fP-OmP"/>
+    </inferredMetricsTieBreakers>
 </document>

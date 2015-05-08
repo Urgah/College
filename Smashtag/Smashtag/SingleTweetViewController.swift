@@ -62,6 +62,7 @@ class SingleTweetViewController: UITableViewController {
 
     let textCellIdentifier = "Tweet"
     let imageCellIdentifier = "Image"
+    let mentionCellIdentier = "searchTwitter"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -107,6 +108,19 @@ class SingleTweetViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
+    //task 5
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let identifier = segue.identifier {
+            if identifier == mentionCellIdentier {
+                if let ttvc = segue.destinationViewController as? TweetTableViewController {
+                    if let cell = sender as? SingleTweetView {
+                        ttvc.searchText = cell.tweetTextLabel.text
+                    }
+                }
+            }
+        }
     }
 
  }
