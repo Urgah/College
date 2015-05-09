@@ -37,12 +37,10 @@ class RecentTwitterController: UITableViewController {
         }
     }
     
-    override func viewDidLoad() {
-        // not working
-        tableView.reloadData()
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        tableView.reloadData()
+    override func viewDidAppear(animated: Bool) {
+        // also not working
+        super.viewWillAppear(animated)
+        println("pls reload")
+        self.tableView.reloadData()
     }
 }
