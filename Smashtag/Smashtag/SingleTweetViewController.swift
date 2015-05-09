@@ -41,21 +41,19 @@ class SingleTweetViewController: UITableViewController {
     }
     
     var mentions: [Mentions] = []
-    struct Mentions: Printable
-    {
+    struct Mentions: Printable {
         var title: String
         var data: [MentionItem]
         var description: String { return "\(title): \(data)" }
     }
     
-    enum MentionItem: Printable
-    {
+    enum MentionItem: Printable {
         case Keyword(String)
         case Image(NSURL, Double)
         var description: String {
             switch self {
-            case .Keyword(let keyword): return keyword
-            case .Image(let url, _): return url.path!
+                case .Keyword(let keyword): return keyword
+                case .Image(let url, _): return url.path!
             }
         }
     }
@@ -84,11 +82,11 @@ class SingleTweetViewController: UITableViewController {
         let mention = mentions[indexPath.section].data[indexPath.row]
         switch mention {
         case .Keyword(let tweetText):
-            let cell = tableView.dequeueReusableCellWithIdentifier(textCellIdentifier, forIndexPath: indexPath) as! SingleTweetView
+            let cell = tableView.dequeueReusableCellWithIdentifier(textCellIdentifier, forIndexPath: indexPath) as! SingleTweetViewCell
             cell.tweetTextLabel.text = tweetText
             return cell
         case .Image(let url, let ratio):
-            let cell = tableView.dequeueReusableCellWithIdentifier(imageCellIdentifier, forIndexPath: indexPath) as! SingleTweetView
+            let cell = tableView.dequeueReusableCellWithIdentifier(imageCellIdentifier, forIndexPath: indexPath) as! SingleTweetViewCell
             cell.imageUrl = url
             return cell
         }
@@ -120,14 +118,14 @@ class SingleTweetViewController: UITableViewController {
         if let identifier = segue.identifier {
             if identifier == mentionCellIdentier {
                 if let ttvc = segue.destinationViewController as? TweetTableViewController {
-                    if let cell = sender as? SingleTweetView {
+                    if let cell = sender as? SingleTweetViewCell {
                         ttvc.searchText = cell.tweetTextLabel.text
                     }
                 }
             } //task 7
             else if identifier == imageViewCellIdentifier {
                 if let ivc = segue.destinationViewController as? TweetImageViewController {
-                    if let cell = sender as? SingleTweetView {
+                    if let cell = sender as? SingleTweetViewCell {
                         ivc.title = title
                         ivc.imageUrl = cell.imageUrl
                     }
@@ -140,7 +138,7 @@ class SingleTweetViewController: UITableViewController {
     //task 6
     override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
         if identifier == mentionCellIdentier {
-            if let cell = sender as? SingleTweetView {
+            if let cell = sender as? SingleTweetViewCell {
                 if let url = cell.tweetTextLabel.text {
                     if url.hasPrefix("http") {
                         var nsUrl: NSURL = NSURL(string: url)!

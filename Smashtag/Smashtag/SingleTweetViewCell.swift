@@ -1,5 +1,5 @@
 //
-//  SingleTweetView.swift
+//  SingleTweetViewCell.swift
 //  Smashtag
 //
 //  Created by Eelco on 07/05/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SingleTweetView: UITableViewCell {
+class SingleTweetViewCell: UITableViewCell {
     
     
     @IBOutlet weak var tweetTextLabel: UILabel!

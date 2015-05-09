@@ -11,7 +11,7 @@ import Foundation
 class RecentSearches {
     
 
-    let key = "RecentSearches.RecentSearches"
+    let key = "RecentSearches"
     let maxSeaches = 100
     
     private let defaults = NSUserDefaults.standardUserDefaults()
