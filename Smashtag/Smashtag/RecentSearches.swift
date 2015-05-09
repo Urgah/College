@@ -11,7 +11,7 @@ import Foundation
 class RecentSearches {
     
 
-    let key = "RecentSearches.RecentTwitterSearches"
+    let key = "RecentSearches.RecentSearches"
     let maxSeaches = 100
     
     private let defaults = NSUserDefaults.standardUserDefaults()
@@ -22,7 +22,17 @@ class RecentSearches {
     }
     
     func add(tweetSearch: String) {
-        recentTwitterSearches.append(tweetSearch)
-        println(recentTwitterSearches)
+        for var i = 0; i < recentTwitterSearches.count; i++ {
+            if tweetSearch == recentTwitterSearches[i] {
+                recentTwitterSearches.removeAtIndex(i)
+                break
+            }
+        }
+        
+        if recentTwitterSearches.count == maxSeaches {
+            recentTwitterSearches.removeAtIndex(99)
+        }
+        
+        recentTwitterSearches.insert(tweetSearch, atIndex: 0)
     }
 }
