@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4906B9081AFDFCCA000B29B4 /* RecentTwitterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4906B9071AFDFCCA000B29B4 /* RecentTwitterController.swift */; };
+		4906B90C1AFE09B3000B29B4 /* RecentSearches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4906B90B1AFE09B3000B29B4 /* RecentSearches.swift */; };
 		496E9C111AFACE4800E61C64 /* SingleTweetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496E9C101AFACE4800E61C64 /* SingleTweetView.swift */; };
 		496E9C131AFCCA4300E61C64 /* TweetImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496E9C121AFCCA4300E61C64 /* TweetImageViewController.swift */; };
 		49E12D7D1AF7BF9600BD8B83 /* SingleTweetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E12D7C1AF7BF9600BD8B83 /* SingleTweetViewController.swift */; };
@@ -34,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4906B9071AFDFCCA000B29B4 /* RecentTwitterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentTwitterController.swift; sourceTree = "<group>"; };
+		4906B90B1AFE09B3000B29B4 /* RecentSearches.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentSearches.swift; sourceTree = "<group>"; };
 		496E9C101AFACE4800E61C64 /* SingleTweetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleTweetView.swift; sourceTree = "<group>"; };
 		496E9C121AFCCA4300E61C64 /* TweetImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetImageViewController.swift; sourceTree = "<group>"; };
 		49E12D7C1AF7BF9600BD8B83 /* SingleTweetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleTweetViewController.swift; sourceTree = "<group>"; };
@@ -101,6 +105,8 @@
 				49E12D7C1AF7BF9600BD8B83 /* SingleTweetViewController.swift */,
 				496E9C101AFACE4800E61C64 /* SingleTweetView.swift */,
 				496E9C121AFCCA4300E61C64 /* TweetImageViewController.swift */,
+				4906B9071AFDFCCA000B29B4 /* RecentTwitterController.swift */,
+				4906B90B1AFE09B3000B29B4 /* RecentSearches.swift */,
 			);
 			path = Smashtag;
 			sourceTree = "<group>";
@@ -250,10 +256,12 @@
 				496E9C111AFACE4800E61C64 /* SingleTweetView.swift in Sources */,
 				EC68763F1A898FC6006B5FDB /* TwitterRequest.swift in Sources */,
 				EC6876401A898FC6006B5FDB /* User.swift in Sources */,
+				4906B9081AFDFCCA000B29B4 /* RecentTwitterController.swift in Sources */,
 				EC6876371A898F4D006B5FDB /* TweetTableViewController.swift in Sources */,
 				49E12D7D1AF7BF9600BD8B83 /* SingleTweetViewController.swift in Sources */,
 				EC68763D1A898FC6006B5FDB /* MediaItem.swift in Sources */,
 				EC68763E1A898FC6006B5FDB /* Tweet.swift in Sources */,
+				4906B90C1AFE09B3000B29B4 /* RecentSearches.swift in Sources */,
 				EC6876421A8994BB006B5FDB /* TweetTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

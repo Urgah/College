@@ -45,6 +45,7 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate
     private var nextRequestToAttempt: TwitterRequest? {
         if lastSuccessfulRequest == nil {
             if searchText != nil {
+                RecentSearches().add(searchText!)
                 return TwitterRequest(search: searchText!, count: 100)
             } else {
                 return nil
