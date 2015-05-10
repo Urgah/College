@@ -127,7 +127,7 @@
                                     <segue destination="MxJ-wT-guP" kind="show" identifier="searchTwitter" id="TgD-fP-OmP"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Image" rowHeight="219" id="rzu-8g-xAS" customClass="SingleTweetViewCell" customModule="Smashtag" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Image" rowHeight="50" id="rzu-8g-xAS" customClass="SingleTweetViewCell" customModule="Smashtag" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rzu-8g-xAS" id="TNv-HP-WD3">
@@ -136,7 +136,7 @@
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vEW-6B-YRd">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="218"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="218" id="t6S-kE-at9"/>
+                                                <constraint firstAttribute="height" constant="218" id="qcN-yc-Hnv"/>
                                             </constraints>
                                         </imageView>
                                     </subviews>
@@ -180,22 +180,12 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IlP-fV-OnM">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="L6F-wy-hDJ">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L6F-wy-hDJ">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                         <gestureRecognizers/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="600" id="9Pe-Ef-vwz"/>
-                                            <constraint firstAttribute="height" constant="600" id="cNe-kC-Gan"/>
-                                        </constraints>
                                     </imageView>
                                 </subviews>
                                 <gestureRecognizers/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="L6F-wy-hDJ" secondAttribute="trailing" constant="-180" id="FKj-o2-bke"/>
-                                    <constraint firstItem="L6F-wy-hDJ" firstAttribute="centerX" secondItem="IlP-fV-OnM" secondAttribute="centerX" id="Lif-mG-eOf"/>
-                                    <constraint firstAttribute="bottom" secondItem="L6F-wy-hDJ" secondAttribute="bottom" constant="-236" id="Yda-t5-Qvf"/>
-                                    <constraint firstItem="L6F-wy-hDJ" firstAttribute="centerY" secondItem="IlP-fV-OnM" secondAttribute="centerY" id="mFk-95-59a"/>
-                                </constraints>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -305,6 +295,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="KFL-5R-eXV"/>
+        <segue reference="TgD-fP-OmP"/>
     </inferredMetricsTieBreakers>
 </document>

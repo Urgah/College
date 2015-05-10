@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TweetImageViewController: UIViewController {
+class TweetImageViewController: UIViewController, UIScrollViewDelegate {
     var imageUrl: NSURL? {
         didSet {
             getImg()
@@ -18,8 +18,33 @@ class TweetImageViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var imageView: UIImageView! 
     
+    
+    var imageSize = CGSizeMake(0,0)
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        scrollView.contentSize = imageView.frame.size
+        scrollView.delegate = self
+    
+        //zooming photo
+        imageSize = imageView.frame.size
+        scrollView.delegate = self
+        scrollView.addSubview(imageView)
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.showsVerticalScrollIndicator = false
+    }
+    
+    override func viewDidLayoutSubviews() {
+        scrollView.maximumZoomScale = 5.0
+        scrollView.contentSize = imageSize
+        let widthScale = scrollView.bounds.size.width / imageSize.width
+        let heightScale = scrollView.bounds.size.height / imageSize.height
+        scrollView.minimumZoomScale = min(widthScale, heightScale)
+        scrollView.setZoomScale(max(widthScale, heightScale), animated: true )
+    }
+    
+    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+        return imageView
     }
     
     func getImg() {
@@ -39,23 +64,5 @@ class TweetImageViewController: UIViewController {
             }
         }
     }
-    
-    private var scrollViewDidScrollOrZoom = false
-    
-    private func autoScale() {
-        if scrollViewDidScrollOrZoom {
-            return
-        }
-        if let sv = scrollView {
-            if imageView != nil {
-                sv.zoomScale = max(sv.bounds.size.height / imageView!.image!.size.height,
-                    sv.bounds.size.width / imageView!.image!.size.width)
-                sv.contentOffset = CGPoint(x: (imageView.frame.size.width - sv.frame.size.width) / 2,
-                    y: (imageView.frame.size.height - sv.frame.size.height) / 2)
-                scrollViewDidScrollOrZoom = false
-            }
-        }
-    }
-    
-    
 }
+
