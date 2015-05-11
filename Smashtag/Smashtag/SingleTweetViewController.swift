@@ -11,7 +11,7 @@ class SingleTweetViewController: UITableViewController {
 
     var tweet: Tweet? {
         didSet {
-            title = tweet?.user.screenName
+            self.title = tweet?.user.screenName
             if let media = tweet?.media {
                 //task 4
                 if media.count > 0 {

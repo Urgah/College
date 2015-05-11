@@ -19,6 +19,7 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate
         didSet {
             lastSuccessfulRequest = nil
             searchTextField?.text = searchText
+            self.title = searchText
             tweets.removeAll()
             tableView.reloadData() // clear out the table view
             refresh()
@@ -30,6 +31,7 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate
         tableView.estimatedRowHeight = tableView.rowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
         refresh()
+        self.title = searchText
     }
 
     private var lastSuccessfulRequest: TwitterRequest?

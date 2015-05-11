@@ -20,6 +20,7 @@ class RecentTwitterController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("RecentTwitterCell", forIndexPath: indexPath) as! UITableViewCell
         
+        recentSearches = RecentSearches().recentTwitterSearches
         cell.textLabel?.text = recentSearches[indexPath.row]
         
         return cell
@@ -37,10 +38,10 @@ class RecentTwitterController: UITableViewController {
         }
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewWillAppear(animated: Bool) {
         // also not working
         super.viewWillAppear(animated)
         println("pls reload")
-        self.tableView.reloadData()
+        tableView.reloadData()
     }
 }
