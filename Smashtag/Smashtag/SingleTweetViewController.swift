@@ -15,7 +15,7 @@ class SingleTweetViewController: UITableViewController {
             if let media = tweet?.media {
                 //task 4
                 if media.count > 0 {
-                mentions.append(Mentions(title: "Images",
+                    mentions.append(Mentions(title: "Images",
                     data: media.map { MentionItem.Image($0.url, $0.aspectRatio) }))
                 }
             }
@@ -96,10 +96,10 @@ class SingleTweetViewController: UITableViewController {
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let mention = mentions[indexPath.section].data[indexPath.row]
         switch mention {
-        case .Image(_, let ratio):
-            return tableView.bounds.size.width / CGFloat(ratio)
-        default:
-            return UITableViewAutomaticDimension
+            case .Image(_, let ratio):
+                return tableView.bounds.size.width / CGFloat(ratio)
+            default:
+                return UITableViewAutomaticDimension
         }
     }
     
