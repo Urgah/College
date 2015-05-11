@@ -81,14 +81,14 @@ class SingleTweetViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let mention = mentions[indexPath.section].data[indexPath.row]
         switch mention {
-        case .Keyword(let tweetText):
-            let cell = tableView.dequeueReusableCellWithIdentifier(textCellIdentifier, forIndexPath: indexPath) as! SingleTweetViewCell
-            cell.tweetTextLabel.text = tweetText
-            return cell
-        case .Image(let url, let ratio):
-            let cell = tableView.dequeueReusableCellWithIdentifier(imageCellIdentifier, forIndexPath: indexPath) as! SingleTweetViewCell
-            cell.imageUrl = url
-            return cell
+            case .Keyword(let tweetText):
+                let cell = tableView.dequeueReusableCellWithIdentifier(textCellIdentifier, forIndexPath: indexPath) as! SingleTweetViewCell
+                cell.tweetTextLabel.text = tweetText
+                return cell
+            case .Image(let url, let ratio):
+                let cell = tableView.dequeueReusableCellWithIdentifier(imageCellIdentifier, forIndexPath: indexPath) as! SingleTweetViewCell
+                cell.imageUrl = url
+                return cell
         }
     }
     

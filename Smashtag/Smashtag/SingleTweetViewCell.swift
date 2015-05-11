@@ -15,11 +15,7 @@ class SingleTweetViewCell: UITableViewCell {
     @IBOutlet weak var tweetImageView: UIImageView!
 
 
-    var tweetText: TweetTableViewCell? {
-        didSet {
-            updateUI()
-        }
-    }
+    var tweetText: TweetTableViewCell?
     
     var imageUrl: NSURL? {
         didSet {

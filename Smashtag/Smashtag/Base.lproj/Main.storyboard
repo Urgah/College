@@ -127,7 +127,7 @@
                                     <segue destination="MxJ-wT-guP" kind="show" identifier="searchTwitter" id="TgD-fP-OmP"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Image" rowHeight="50" id="rzu-8g-xAS" customClass="SingleTweetViewCell" customModule="Smashtag" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Image" id="rzu-8g-xAS" customClass="SingleTweetViewCell" customModule="Smashtag" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rzu-8g-xAS" id="TNv-HP-WD3">
@@ -174,7 +174,7 @@
                         <viewControllerLayoutGuide type="bottom" id="mDR-7c-5NO"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="EoL-89-N7i">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IlP-fV-OnM">
@@ -197,6 +197,7 @@
                             <constraint firstItem="IlP-fV-OnM" firstAttribute="centerX" secondItem="EoL-89-N7i" secondAttribute="centerX" id="aeK-qt-Oze"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <connections>
                         <outlet property="imageView" destination="L6F-wy-hDJ" id="Fm4-zu-vVX"/>
                         <outlet property="scrollView" destination="IlP-fV-OnM" id="XAQ-yt-l9H"/>
@@ -295,6 +296,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="iNl-j4-Z5X"/>
+        <segue reference="TgD-fP-OmP"/>
     </inferredMetricsTieBreakers>
 </document>
