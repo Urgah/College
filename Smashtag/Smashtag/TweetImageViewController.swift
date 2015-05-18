@@ -24,7 +24,6 @@ class TweetImageViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
         
         scrollView.contentSize = imageView.frame.size
-        scrollView.delegate = self
     
         //zooming photo
         imageSize = imageView.frame.size
