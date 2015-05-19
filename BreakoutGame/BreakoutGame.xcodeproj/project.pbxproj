@@ -8,12 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		49D58D5E1B09FDBC00097EBB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D58D5D1B09FDBC00097EBB /* AppDelegate.swift */; };
-		49D58D601B09FDBC00097EBB /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D58D5F1B09FDBC00097EBB /* FirstViewController.swift */; };
-		49D58D621B09FDBC00097EBB /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D58D611B09FDBC00097EBB /* SecondViewController.swift */; };
+		49D58D601B09FDBC00097EBB /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D58D5F1B09FDBC00097EBB /* GameViewController.swift */; };
+		49D58D621B09FDBC00097EBB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D58D611B09FDBC00097EBB /* SettingsViewController.swift */; };
 		49D58D651B09FDBC00097EBB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49D58D631B09FDBC00097EBB /* Main.storyboard */; };
 		49D58D671B09FDBC00097EBB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49D58D661B09FDBC00097EBB /* Images.xcassets */; };
 		49D58D6A1B09FDBC00097EBB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49D58D681B09FDBC00097EBB /* LaunchScreen.xib */; };
 		49D58D761B09FDBC00097EBB /* BreakoutGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D58D751B09FDBC00097EBB /* BreakoutGameTests.swift */; };
+		49D58D841B0A48A300097EBB /* BreakOutBehaviour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D58D831B0A48A300097EBB /* BreakOutBehaviour.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,14 +31,15 @@
 		49D58D581B09FDBC00097EBB /* BreakoutGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BreakoutGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49D58D5C1B09FDBC00097EBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		49D58D5D1B09FDBC00097EBB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		49D58D5F1B09FDBC00097EBB /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		49D58D611B09FDBC00097EBB /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		49D58D5F1B09FDBC00097EBB /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		49D58D611B09FDBC00097EBB /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		49D58D641B09FDBC00097EBB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		49D58D661B09FDBC00097EBB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		49D58D691B09FDBC00097EBB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		49D58D6F1B09FDBC00097EBB /* BreakoutGameTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BreakoutGameTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		49D58D741B09FDBC00097EBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		49D58D751B09FDBC00097EBB /* BreakoutGameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakoutGameTests.swift; sourceTree = "<group>"; };
+		49D58D831B0A48A300097EBB /* BreakOutBehaviour.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BreakOutBehaviour.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,12 +81,10 @@
 		49D58D5A1B09FDBC00097EBB /* BreakoutGame */ = {
 			isa = PBXGroup;
 			children = (
-				49D58D5D1B09FDBC00097EBB /* AppDelegate.swift */,
-				49D58D5F1B09FDBC00097EBB /* FirstViewController.swift */,
-				49D58D611B09FDBC00097EBB /* SecondViewController.swift */,
+				49D58D5F1B09FDBC00097EBB /* GameViewController.swift */,
+				49D58D831B0A48A300097EBB /* BreakOutBehaviour.swift */,
+				49D58D611B09FDBC00097EBB /* SettingsViewController.swift */,
 				49D58D631B09FDBC00097EBB /* Main.storyboard */,
-				49D58D661B09FDBC00097EBB /* Images.xcassets */,
-				49D58D681B09FDBC00097EBB /* LaunchScreen.xib */,
 				49D58D5B1B09FDBC00097EBB /* Supporting Files */,
 			);
 			path = BreakoutGame;
@@ -93,6 +93,9 @@
 		49D58D5B1B09FDBC00097EBB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				49D58D661B09FDBC00097EBB /* Images.xcassets */,
+				49D58D681B09FDBC00097EBB /* LaunchScreen.xib */,
+				49D58D5D1B09FDBC00097EBB /* AppDelegate.swift */,
 				49D58D5C1B09FDBC00097EBB /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -215,9 +218,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				49D58D621B09FDBC00097EBB /* SecondViewController.swift in Sources */,
+				49D58D621B09FDBC00097EBB /* SettingsViewController.swift in Sources */,
 				49D58D5E1B09FDBC00097EBB /* AppDelegate.swift in Sources */,
-				49D58D601B09FDBC00097EBB /* FirstViewController.swift in Sources */,
+				49D58D841B0A48A300097EBB /* BreakOutBehaviour.swift in Sources */,
+				49D58D601B09FDBC00097EBB /* GameViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -415,6 +419,7 @@
 				49D58D7B1B09FDBC00097EBB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		49D58D7C1B09FDBC00097EBB /* Build configuration list for PBXNativeTarget "BreakoutGameTests" */ = {
 			isa = XCConfigurationList;
@@ -423,6 +428,7 @@
 				49D58D7E1B09FDBC00097EBB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
