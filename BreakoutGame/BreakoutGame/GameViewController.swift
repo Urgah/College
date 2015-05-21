@@ -10,19 +10,31 @@ import UIKit
 
 class GameViewController: UIViewController {
     @IBOutlet weak var gameView: UIView!
+    
+    
+    var settings: Settings?
 
     let BallSize: CGFloat = 40.0
-    let PaddleSize = CGSize(width: 80.0, height: 20.0)
+    var PaddleSize = CGSize(width: 80.0, height: 20.0)
     let PaddleCornerRadius: CGFloat = 5.0
-    let PaddleColor = UIColor.redColor()
+    let PaddleColor = UIColor
+        .redColor()
     
     let breakout = BreakOutBehaviour()
     lazy var animator: UIDynamicAnimator = { UIDynamicAnimator(referenceView: self.gameView) }()
     
+    static var ballPushed = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        removeAllBricks()
+        
+        settings = Settings()
+        PaddleSize.width = settings!.paddleSize
+        
         animator.addBehavior(breakout)
         gameView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "pushBall:"))
+        createBricks()
         
         gameView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: "panPaddle:"))
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: "swipePaddleLeft:")
@@ -56,6 +68,8 @@ class GameViewController: UIViewController {
         if !CGRectContainsRect(gameView.bounds, paddle.frame) {
             resetPaddle()
         }
+        
+        placeBricks()
     }
     
     // ball
@@ -66,6 +80,10 @@ class GameViewController: UIViewController {
     }
     
     func pushBall(gesture: UITapGestureRecognizer) {
+        if GameViewController.ballPushed == true {
+            return
+        }
+        
         if gesture.state == .Ended {
             if breakout.balls.count == 0 {
                 let ball = createBall()
@@ -103,7 +121,7 @@ class GameViewController: UIViewController {
     
     func resetPaddle() {
         //We dont want the paddle to be in the buttom so we place it 80 points up
-        paddle.center = CGPoint(x: gameView.bounds.midX, y: gameView.bounds.maxY - paddle.bounds.height - 80)
+        paddle.center = CGPoint(x: gameView.bounds.midX, y: gameView.bounds.maxY - paddle.bounds.height - settings!.paddleSize)
         addPaddleBarrier()
     }
     
@@ -143,6 +161,82 @@ class GameViewController: UIViewController {
         paddle.frame.origin = origin
         addPaddleBarrier()
     }
+    
+    //bricks
+    var bricks = [Int:Brick]()
+    
+    struct Brick {
+        var relativeFrame: CGRect
+        var view: UIView
+    }
+    
+    func placeBricks() {
+        for (index, brick) in bricks {
+            brick.view.frame.origin.x = brick.relativeFrame.origin.x * gameView.bounds.width
+            brick.view.frame.origin.y = brick.relativeFrame.origin.y * gameView.bounds.height
+            brick.view.frame.size.width = brick.relativeFrame.width * gameView.bounds.width
+            brick.view.frame.size.height = brick.relativeFrame.height * gameView.bounds.height
+            brick.view.frame = CGRectInset(brick.view.frame, self.BrickSpacing, self.BrickSpacing)
+            breakout.addBarrier(UIBezierPath(roundedRect: brick.view.frame, cornerRadius: self.BrickCornerRadius), named: index)
+        }
+    }
+    
+    let BrickTopSpacing: CGFloat = 0.05
+    let BrickSpacing: CGFloat = 5.0
+    let BrickCornerRadius: CGFloat = 2.5
 
+    func createBricks() {
+        let deltaX = 1 / CGFloat(settings!.columns)
+        let deltaY = 0.2 / CGFloat(settings!.rows)
+        var frame = CGRect(origin: CGPointZero, size: CGSize(width: deltaX, height: deltaY))
+        
+        for row in 0..<Int(settings!.rows) {
+            for column in 0..<Int(settings!.columns) {
+                frame.origin.x = deltaX * CGFloat(column)
+                frame.origin.y = deltaY * CGFloat(row) + self.BrickTopSpacing
+                let brick = UIView(frame: frame)
+                brick.backgroundColor = UIColor.greenColor()
+                brick.layer.cornerRadius = self.BrickCornerRadius
+                brick.layer.borderColor = UIColor.blackColor().CGColor
+                brick.layer.shadowOffset = CGSize(width: 1.0, height: 1.0)
+                brick.layer.shadowOpacity = 0.1
+                
+                gameView.addSubview(brick)
+                
+                bricks[row * Int(settings!.columns) + column] = Brick(relativeFrame: frame, view: brick)
+            }
+        }
+    }
+    
+    func collisionBehavior(behavior: UICollisionBehavior, beganContactForItem item: UIDynamicItem, withBoundaryIdentifier identifier: NSCopying, atPoint p: CGPoint) {
+        if let index = identifier as? Int {
+            println("\(index)")
+                destroyBrickAtIndex(index)
+        }
+    }
+    
+    func removeAllBricks() {
+        for i in 00..<bricks.count {
+            destroyBrickAtIndex(i)
+        }
+    }
+    
+    private func destroyBrickAtIndex(index: Int) {
+        breakout.removeBarrier(index)
+        if let brick = bricks[index] {
+            UIView.transitionWithView(brick.view, duration: 0.2, options: .TransitionFlipFromBottom, animations: {
+                brick.view.alpha = 0.5
+                }, completion: { (success) -> Void in
+                    self.breakout.addBrick(brick.view)
+                    UIView.animateWithDuration(1.0, animations: {
+                        brick.view.alpha = 0.0
+                        }, completion: { (success) -> Void in
+                            self.breakout.removeBrick(brick.view)
+                            brick.view.removeFromSuperview()
+                    })
+            })
+            bricks.removeValueForKey(index)
+        }
+    }
 }
 

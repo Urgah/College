@@ -57,17 +57,22 @@ class BreakOutBehaviour: UIDynamicBehavior {
         dynamicAnimator?.referenceView?.addSubview(ball)
         collider.addItem(ball)
         ballBehavior.addItem(ball)
+        
+        GameViewController.ballPushed = true
     }
     
     func removeBall(ball: UIView) {
         collider.removeItem(ball)
         ballBehavior.removeItem(ball)
         ball.removeFromSuperview()
+        
+        GameViewController.ballPushed = false
     }
     
     func pushBall(ball: UIView) {
         let push = UIPushBehavior(items: [ball], mode: .Instantaneous)
-        push.magnitude = speed
+        var settings = Settings()
+        push.magnitude = settings.speed/100
         
         push.angle = CGFloat(Double(arc4random()) * M_PI * 2 / Double(UINT32_MAX))
         push.action = { [weak push] in
@@ -88,12 +93,11 @@ class BreakOutBehaviour: UIDynamicBehavior {
     }
     
     func addBrick(brick: UIView) {
+        println("brick")
         gravity.addItem(brick)
     }
     
     func removeBrick(brick: UIView) {
         gravity.removeItem(brick)
     }
-
-
 }
