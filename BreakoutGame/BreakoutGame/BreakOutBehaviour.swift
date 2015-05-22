@@ -91,13 +91,4 @@ class BreakOutBehaviour: UIDynamicBehavior {
     func removeBarrier(name: NSCopying) {
         collider.removeBoundaryWithIdentifier(name)
     }
-    
-    func addBrick(brick: UIView) {
-        println("brick")
-        gravity.addItem(brick)
-    }
-    
-    func removeBrick(brick: UIView) {
-        gravity.removeItem(brick)
-    }
 }

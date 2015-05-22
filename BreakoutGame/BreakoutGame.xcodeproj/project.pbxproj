@@ -16,6 +16,7 @@
 		49D58D761B09FDBC00097EBB /* BreakoutGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D58D751B09FDBC00097EBB /* BreakoutGameTests.swift */; };
 		49D58D841B0A48A300097EBB /* BreakOutBehaviour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D58D831B0A48A300097EBB /* BreakOutBehaviour.swift */; };
 		49D58D861B0B783800097EBB /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D58D851B0B783800097EBB /* Settings.swift */; };
+		49D58D881B0F6CD100097EBB /* Brick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D58D871B0F6CD100097EBB /* Brick.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,7 @@
 		49D58D751B09FDBC00097EBB /* BreakoutGameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakoutGameTests.swift; sourceTree = "<group>"; };
 		49D58D831B0A48A300097EBB /* BreakOutBehaviour.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BreakOutBehaviour.swift; sourceTree = "<group>"; };
 		49D58D851B0B783800097EBB /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		49D58D871B0F6CD100097EBB /* Brick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Brick.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				49D58D5F1B09FDBC00097EBB /* GameViewController.swift */,
+				49D58D871B0F6CD100097EBB /* Brick.swift */,
 				49D58D831B0A48A300097EBB /* BreakOutBehaviour.swift */,
 				49D58D611B09FDBC00097EBB /* SettingsViewController.swift */,
 				49D58D851B0B783800097EBB /* Settings.swift */,
@@ -227,6 +230,7 @@
 				49D58D841B0A48A300097EBB /* BreakOutBehaviour.swift in Sources */,
 				49D58D601B09FDBC00097EBB /* GameViewController.swift in Sources */,
 				49D58D861B0B783800097EBB /* Settings.swift in Sources */,
+				49D58D881B0F6CD100097EBB /* Brick.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
