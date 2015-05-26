@@ -13,6 +13,7 @@ class Settings {
     var columns: CGFloat = 5
     var speed: CGFloat = 100
     var paddleSize: CGFloat = 80
+    var lifes: Int = 3
     
     private let defaults = NSUserDefaults.standardUserDefaults()
     
@@ -25,6 +26,7 @@ class Settings {
         self.columns = (defaults.objectForKey("columns") as? CGFloat)!
         self.speed = (defaults.objectForKey("speed") as? CGFloat)!
         self.paddleSize = (defaults.objectForKey("paddleSize") as? CGFloat)!
+        self.lifes = (defaults.objectForKey("lifes") as? Int)!
     }
  
     func setSettings() {
@@ -32,5 +34,6 @@ class Settings {
         defaults.setObject(self.columns, forKey: "columns")
         defaults.setObject(self.speed, forKey: "speed")
         defaults.setObject(self.paddleSize, forKey: "paddleSize")
+        defaults.setObject(self.lifes, forKey: "lifes")
     }
 }
