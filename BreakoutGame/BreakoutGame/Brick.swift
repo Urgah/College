@@ -21,7 +21,20 @@ class Brick {
         self.index = index
     }
     
-    func hit() {
+    func hit() -> Bool {
         self.hitsLeft--
+        return isDestroyed()
+    }
+    
+    func isDestroyed() -> Bool {
+        if self.hitsLeft == 0 {
+            return true
+        }
+        
+        return false
+    }
+    
+    func setToDestroy() {
+        self.hitsLeft = 0
     }
 }
