@@ -29,12 +29,16 @@ class SettingsViewController: UIViewController {
         columnLabel.text = "Columns: \(columnSliderNumb)"
     }
     
-    
-    @IBAction func saveSettingsAndResetGame(sender: UIButton) {
+    func saveSettings() {
         settings?.setSettings()
         
         var gameView = self.tabBarController?.viewControllers?[0] as! UIViewController
         gameView.viewDidLoad()
+
+    }
+    
+    @IBAction func saveSettingsAndResetGame(sender: UIButton) {
+        saveSettings()
     }
     
     
@@ -54,6 +58,21 @@ class SettingsViewController: UIViewController {
         var speedSliderNumb = Int(round(sender.value))
         
         speedLabel.text = "Speed: \(speedSliderNumb)"
+    }
+
+    @IBOutlet weak var changeDifficulty: UISegmentedControl!
+
+    var lifes = 3
+    @IBAction func difficultySet(sender: UISegmentedControl)
+    {
+        switch sender.selectedSegmentIndex {
+        case 0: lifes = 5
+        case 1: lifes = 3
+        case 2: lifes = 1
+        default: lifes = 3
+        }
+        
+        settings?.lifes = lifes
     }
     
     var settings: Settings?
@@ -75,6 +94,17 @@ class SettingsViewController: UIViewController {
         
         speedLabel.text = "Speed: \(settings!.speed)"
         speedSlider.value = Float(settings!.speed)
+        
+        var selectedSegment = settings?.lifes
+        var difficulty: Int = 0
+        switch selectedSegment! {
+        case 5: difficulty = 0
+        case 3: difficulty = 1
+        case 1: difficulty = 2
+        default: difficulty = 1
+        }
+        
+        changeDifficulty.selectedSegmentIndex = difficulty
     }
 
     override func didReceiveMemoryWarning() {
