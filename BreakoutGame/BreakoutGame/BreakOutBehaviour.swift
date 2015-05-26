@@ -74,7 +74,8 @@ class BreakOutBehaviour: UIDynamicBehavior {
         var settings = Settings()
         push.magnitude = settings.speed/100
         
-        push.angle = CGFloat(Double(arc4random()) * M_PI * 2 / Double(UINT32_MAX))
+        var angle:Double = Double(arc4random_uniform(30) + 75)
+        push.angle = CGFloat(angle)
         push.action = { [weak push] in
             if !push!.active {
                 self.removeChildBehavior(push!)

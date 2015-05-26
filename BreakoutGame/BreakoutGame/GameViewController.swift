@@ -9,15 +9,19 @@
 import UIKit
 
 class GameViewController: UIViewController, UICollisionBehaviorDelegate {
-    @IBOutlet weak var gameView: UIView! 
+    @IBOutlet weak var gameView: UIView!
+    @IBOutlet weak var lifesLeftLabel: UILabel!
+    @IBOutlet weak var scoreLabel: UILabel!
     
     var settings: Settings?
+    var firstLoad = true
+    var lifes: Int = 0
+    var score: Int = 0
 
     let BallSize: CGFloat = 40.0
     var PaddleSize = CGSize(width: 80.0, height: 20.0)
     let PaddleCornerRadius: CGFloat = 5.0
-    let PaddleColor = UIColor
-        .redColor()
+    let PaddleColor = UIColor.redColor()
     
     let breakout = BreakOutBehaviour()
     lazy var animator: UIDynamicAnimator = { UIDynamicAnimator(referenceView: self.gameView) }()
@@ -26,15 +30,26 @@ class GameViewController: UIViewController, UICollisionBehaviorDelegate {
     
     func reload() {
         self.gameView.setNeedsDisplay()
+        paddle!.removeFromSuperview()
+        println("reload")
         removeAllBricks()
     }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        reload()
+        if !firstLoad{
+            reload()
+        }
         
         settings = Settings()
         PaddleSize.width = settings!.paddleSize
+        
+        lifesLeftLabel.text = "Lives: \(settings!.lifes)"
+        lifes = settings!.lifes + 1
+        score = 0
+        scoreLabel.text = "Score: \(score)"
+        paddle = createPaddle()
         
         animator.addBehavior(breakout)
         gameView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "pushBall:"))
@@ -50,6 +65,8 @@ class GameViewController: UIViewController, UICollisionBehaviorDelegate {
         let swipeRight = UISwipeGestureRecognizer(target: self, action: "swipePaddleRight:")
         swipeRight.direction = .Right
         gameView.addGestureRecognizer(swipeRight)
+        
+        self.firstLoad = false
     }
 
     override func didReceiveMemoryWarning() {
@@ -72,16 +89,16 @@ class GameViewController: UIViewController, UICollisionBehaviorDelegate {
             }
         }
         
-        if !CGRectContainsRect(gameView.bounds, paddle.frame) {
+        if !CGRectContainsRect(gameView.bounds, paddle!.frame) {
             resetPaddle()
         }
         
-       // placeBricks()
+        placeBricks()
     }
     
     // ball
     func placeBall(ball: UIView) {
-        var center = paddle.center
+        var center = paddle!.center
         center.y -= self.PaddleSize.height / 2 + self.PaddleSize.height
         ball.center = center
     }
@@ -92,6 +109,13 @@ class GameViewController: UIViewController, UICollisionBehaviorDelegate {
         }
         
         if gesture.state == .Ended {
+            lifes--
+            lifesLeftLabel.text = "Lives: \(lifes)"
+            if lifes == 0 {
+                gameLost()
+                return
+            }
+            
             if breakout.balls.count == 0 {
                 let ball = createBall()
                 placeBall(ball)
@@ -113,7 +137,8 @@ class GameViewController: UIViewController, UICollisionBehaviorDelegate {
     }
 
     // paddle
-    lazy var paddle: UIView = {
+    var paddle: UIView?
+    func createPaddle() -> UIView {
         let paddle = UIView(frame: CGRect(origin: CGPoint(x: -1, y: -1), size: self.PaddleSize))
         paddle.backgroundColor = self.PaddleColor
         paddle.layer.cornerRadius = self.PaddleCornerRadius
@@ -124,15 +149,15 @@ class GameViewController: UIViewController, UICollisionBehaviorDelegate {
         
         self.gameView.addSubview(paddle)
         return paddle
-    }()
+    }
     
     func resetPaddle() {
-        paddle.center = CGPoint(x: gameView.bounds.midX, y: gameView.bounds.maxY - paddle.bounds.height - settings!.paddleSize)
+        paddle!.center = CGPoint(x: gameView.bounds.midX, y: gameView.bounds.maxY - paddle!.bounds.height - settings!.paddleSize)
         addPaddleBarrier()
     }
     
     func addPaddleBarrier() {
-        breakout.addBarrier(UIBezierPath(roundedRect: paddle.frame, cornerRadius: self.PaddleCornerRadius), named: "Paddle")
+        breakout.addBarrier(UIBezierPath(roundedRect: paddle!.frame, cornerRadius: self.PaddleCornerRadius), named: "Paddle")
     }
     
     func panPaddle(gesture: UIPanGestureRecognizer) {
@@ -162,9 +187,9 @@ class GameViewController: UIViewController, UICollisionBehaviorDelegate {
     }
     
     func placePaddle(translation: CGPoint) {
-        var origin = paddle.frame.origin
+        var origin = paddle!.frame.origin
         origin.x = max(min(origin.x + translation.x, gameView.bounds.maxX - self.PaddleSize.width), 0.0)
-        paddle.frame.origin = origin
+        paddle!.frame.origin = origin
         addPaddleBarrier()
     }
     
@@ -176,12 +201,14 @@ class GameViewController: UIViewController, UICollisionBehaviorDelegate {
         if let bricksLength = bricks?.count {
             for i in 0..<bricksLength {
                 if var brick = bricks?[i] {
-                    brick.view.frame.origin.x = brick.relativeFrame.origin.x * gameView.bounds.width
-                    brick.view.frame.origin.y = brick.relativeFrame.origin.y * gameView.bounds.height
-                    brick.view.frame.size.width = brick.relativeFrame.width * gameView.bounds.width
-                    brick.view.frame.size.height = brick.relativeFrame.height * gameView.bounds.height
-                    brick.view.frame = CGRectInset(brick.view.frame, self.BrickSpacing, self.BrickSpacing)
-                    breakout.addBarrier(UIBezierPath(roundedRect: brick.view.frame, cornerRadius: self.BrickCornerRadius), named: i)
+                    if !brick.isDestroyed() {
+                        brick.view.frame.origin.x = brick.relativeFrame.origin.x * gameView.bounds.width
+                        brick.view.frame.origin.y = brick.relativeFrame.origin.y * gameView.bounds.height
+                        brick.view.frame.size.width = brick.relativeFrame.width * gameView.bounds.width
+                        brick.view.frame.size.height = brick.relativeFrame.height * gameView.bounds.height
+                        brick.view.frame = CGRectInset(brick.view.frame, self.BrickSpacing, self.BrickSpacing)
+                        breakout.addBarrier(UIBezierPath(roundedRect: brick.view.frame, cornerRadius: self.BrickCornerRadius), named: i)
+                    }
                 }
             }
         }
@@ -191,11 +218,11 @@ class GameViewController: UIViewController, UICollisionBehaviorDelegate {
     let BrickSpacing: CGFloat = 5.0
     let BrickCornerRadius: CGFloat = 2.5
     
-    func randomColor(randomNumber: Int) -> UIColor {
+    func setColor(randomNumber: Int) -> UIColor {
         switch(randomNumber){
-        case 1: return UIColor.redColor()
+        case 1: return UIColor.greenColor()
         case 2: return UIColor.yellowColor()
-        case 3: return UIColor.greenColor()
+        case 3: return UIColor.redColor()
         default: return UIColor.greenColor()
         }
     }
@@ -206,11 +233,12 @@ class GameViewController: UIViewController, UICollisionBehaviorDelegate {
         var frame = CGRect(origin: CGPointZero, size: CGSize(width: deltaX, height: deltaY))
         var index = 0
         
+        bricks! = []
         for row in 0..<Int(settings!.rows) {
             for column in 0..<Int(settings!.columns) {
                 
                 let randomNumber =  Int(arc4random_uniform(3)) + 1
-                var color: UIColor = randomColor(randomNumber)
+                var color: UIColor = setColor(randomNumber)
                 
                 frame.origin.x = deltaX * CGFloat(column)
                 frame.origin.y = deltaY * CGFloat(row) + self.BrickTopSpacing
@@ -228,37 +256,54 @@ class GameViewController: UIViewController, UICollisionBehaviorDelegate {
                 
                 index++
             }
-            
-            totalBricks = index
         }
+        
+        totalBricks = index
     }
     
+    static var lastHitIndex: Int = -1
     func collisionBehavior(behavior: UICollisionBehavior, beganContactForItem item: UIDynamicItem, withBoundaryIdentifier identifier: NSCopying, atPoint p: CGPoint) {
         if let index = identifier as? Int {
+            //We dont want double collision
+            if index == GameViewController.lastHitIndex {
+                return
+            }
+            GameViewController.lastHitIndex = index
             destroyBrickAtIndex(index)
+        }
+        else {
+            //Reset the index when there is collision with no brick
+            GameViewController.lastHitIndex = -1
         }
     }
     
     func removeAllBricks() {
         for i in 0..<bricks!.count {
-            destroyBrickAtIndex(i)
+            breakout.removeBarrier(i)
+            bricks![i].setToDestroy()
+            bricks![i].view.removeFromSuperview()
         }
     }
     
- 
     private func destroyBrickAtIndex(index: Int) {
-        breakout.removeBarrier(index)
         if let brick = bricks?[index] {
-            UIView.transitionWithView(brick.view, duration: 0.2, options: .TransitionFlipFromBottom, animations: {
-                }, completion: { (success) -> Void in
+            if brick.hit() {
+                breakout.removeBarrier(index)
+                UIView.transitionWithView(brick.view, duration: 0.2, options: .TransitionFlipFromBottom, animations: {},completion: { (success) -> Void in
                     UIView.animateWithDuration(1.0, animations: {
-                        brick.view.alpha = 0.0
-                        }, completion: { (success) -> Void in
-                            brick.view.removeFromSuperview()
-                            self.checkGameWon()
-                    })
-            })
-            totalBricks--
+                            brick.view.alpha = 0.0
+                            }, completion: { (success) -> Void in
+                                brick.view.removeFromSuperview()
+                                self.totalBricks--
+                                self.score++
+                                self.scoreLabel.text = "Score: \(self.score)"
+                                self.checkGameWon()
+                        })
+                })
+            }
+            else {
+                brick.view.backgroundColor = setColor(brick.hitsLeft)
+            }
         }
     }
     
@@ -266,10 +311,21 @@ class GameViewController: UIViewController, UICollisionBehaviorDelegate {
     func checkGameWon() {
         if totalBricks == 0 {
             let gameWonAlert = UIAlertController(title: "Game Won", message: "You won the game", preferredStyle: UIAlertControllerStyle.Alert)
-            gameWonAlert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
-            
+                
+            gameWonAlert.addAction(UIAlertAction(title: "Play again", style: .Default) { action -> Void in
+                self.viewDidLoad()
+            })
             self.presentViewController(gameWonAlert, animated: true, completion: nil)
         }
+    }
+    
+    func gameLost() {
+        let gameLostAlert = UIAlertController(title: "Game lost", message: "You lost the game", preferredStyle: UIAlertControllerStyle.Alert)
+        gameLostAlert.addAction(UIAlertAction(title: "Play again", style: .Default) { action -> Void in
+            self.viewDidLoad()
+            })
+        
+        self.presentViewController(gameLostAlert, animated: true, completion: nil)
     }
 }
 
