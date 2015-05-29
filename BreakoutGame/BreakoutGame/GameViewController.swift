@@ -20,8 +20,7 @@ class GameViewController: UIViewController, UICollisionBehaviorDelegate {
 
     let BallSize: CGFloat = 40.0
     var PaddleSize = CGSize(width: 80.0, height: 20.0)
-    let PaddleCornerRadius: CGFloat = 5.0
-    let PaddleColor = UIColor.redColor()
+    var difficulty: UInt32 = 0
     
     let breakout = BreakOutBehaviour()
     lazy var animator: UIDynamicAnimator = { UIDynamicAnimator(referenceView: self.gameView) }()
@@ -45,8 +44,7 @@ class GameViewController: UIViewController, UICollisionBehaviorDelegate {
         settings = Settings()
         PaddleSize.width = settings!.paddleSize
         
-        lifesLeftLabel.text = "Lives: \(settings!.lifes)"
-        lifes = settings!.lifes + 1
+        setLives(settings!.lifes)
         score = 0
         scoreLabel.text = "Score: \(score)"
         paddle = createPaddle()
@@ -93,6 +91,7 @@ class GameViewController: UIViewController, UICollisionBehaviorDelegate {
             resetPaddle()
         }
         
+        resetPaddle()
         placeBricks()
     }
     
@@ -140,8 +139,8 @@ class GameViewController: UIViewController, UICollisionBehaviorDelegate {
     var paddle: UIView?
     func createPaddle() -> UIView {
         let paddle = UIView(frame: CGRect(origin: CGPoint(x: -1, y: -1), size: self.PaddleSize))
-        paddle.backgroundColor = self.PaddleColor
-        paddle.layer.cornerRadius = self.PaddleCornerRadius
+        paddle.backgroundColor = UIColor.blueColor()
+        paddle.layer.cornerRadius = 10
         paddle.layer.borderColor = UIColor.blackColor().CGColor
         paddle.layer.borderWidth = 2.0
         paddle.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
@@ -152,12 +151,12 @@ class GameViewController: UIViewController, UICollisionBehaviorDelegate {
     }
     
     func resetPaddle() {
-        paddle!.center = CGPoint(x: gameView.bounds.midX, y: gameView.bounds.maxY - paddle!.bounds.height - settings!.paddleSize)
+        paddle!.center = CGPoint(x: gameView.bounds.midX, y: gameView.bounds.maxY - paddle!.bounds.height - 100)
         addPaddleBarrier()
     }
     
     func addPaddleBarrier() {
-        breakout.addBarrier(UIBezierPath(roundedRect: paddle!.frame, cornerRadius: self.PaddleCornerRadius), named: "Paddle")
+        breakout.addBarrier(UIBezierPath(roundedRect: paddle!.frame, cornerRadius: 10), named: "Paddle")
     }
     
     func panPaddle(gesture: UIPanGestureRecognizer) {
@@ -222,7 +221,9 @@ class GameViewController: UIViewController, UICollisionBehaviorDelegate {
         switch(randomNumber){
         case 1: return UIColor.greenColor()
         case 2: return UIColor.yellowColor()
-        case 3: return UIColor.redColor()
+        case 3: return UIColor.orangeColor()
+        case 4: return UIColor.redColor()
+        case 5: return UIColor.blackColor()
         default: return UIColor.greenColor()
         }
     }
@@ -237,7 +238,7 @@ class GameViewController: UIViewController, UICollisionBehaviorDelegate {
         for row in 0..<Int(settings!.rows) {
             for column in 0..<Int(settings!.columns) {
                 
-                let randomNumber =  Int(arc4random_uniform(3)) + 1
+                let randomNumber =  Int(arc4random_uniform(difficulty)) + 1
                 var color: UIColor = setColor(randomNumber)
                 
                 frame.origin.x = deltaX * CGFloat(column)
@@ -326,6 +327,19 @@ class GameViewController: UIViewController, UICollisionBehaviorDelegate {
             })
         
         self.presentViewController(gameLostAlert, animated: true, completion: nil)
+    }
+    
+    func setLives(settingLifes: Int) {
+        switch settingLifes {
+        case 1: difficulty = UInt32(5)
+        case 3: difficulty = UInt32(3)
+        case 5: difficulty = UInt32(1)
+        default: difficulty = UInt32(3)
+        }
+        
+        lifes = settingLifes + 1
+
+        lifesLeftLabel.text = "Lives: \(lifes - 1)"
     }
 }
 

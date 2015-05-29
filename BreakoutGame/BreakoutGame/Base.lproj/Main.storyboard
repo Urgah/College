@@ -2,8 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
-        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -121,7 +119,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" misplaced="YES" text="Difficulty" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ktD-s1-xso">
-                                <rect key="frame" x="16" y="341" width="67" height="17"/>
+                                <rect key="frame" x="16" y="340" width="67" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -140,63 +138,34 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="mgD-NK-35Y" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leadingMargin" id="16d-dx-iSk"/>
-                            <constraint firstAttribute="centerY" secondItem="mgD-NK-35Y" secondAttribute="centerY" constant="228" id="2HV-l3-Oz2"/>
-                            <constraint firstAttribute="centerY" secondItem="ECI-20-Isa" secondAttribute="centerY" constant="185.5" id="3WN-VR-xxu"/>
-                            <constraint firstItem="W3g-H4-KLN" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" constant="8" id="3r4-vF-QaC"/>
-                            <constraint firstAttribute="centerY" secondItem="574-ea-EEo" secondAttribute="centerY" constant="99.5" id="4kb-TS-oYS"/>
-                            <constraint firstItem="mgD-NK-35Y" firstAttribute="leading" secondItem="YOQ-UK-VpA" secondAttribute="leading" id="7co-yJ-fzS"/>
-                            <constraint firstItem="RDX-SE-uZR" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" constant="250" id="Ads-tT-Ku3"/>
-                            <constraint firstItem="mgD-NK-35Y" firstAttribute="leading" secondItem="ktD-s1-xso" secondAttribute="leading" id="Dh7-gn-jpy"/>
-                            <constraint firstItem="mgD-NK-35Y" firstAttribute="trailing" secondItem="tCR-zj-utr" secondAttribute="trailing" id="Dka-KN-tw4"/>
-                            <constraint firstAttribute="centerY" secondItem="V6Z-Wx-PfW" secondAttribute="centerY" constant="66" id="DqV-iZ-Vsr"/>
-                            <constraint firstItem="mgD-NK-35Y" firstAttribute="leading" secondItem="574-ea-EEo" secondAttribute="leading" id="Dyi-0m-B5H"/>
-                            <constraint firstItem="YOQ-UK-VpA" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" constant="113" id="EGS-6R-2Rd"/>
-                            <constraint firstItem="mgD-NK-35Y" firstAttribute="trailing" secondItem="V6Z-Wx-PfW" secondAttribute="trailing" id="FTf-8T-34c"/>
-                            <constraint firstItem="574-ea-EEo" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" constant="170" id="FY1-QG-icD"/>
-                            <constraint firstAttribute="centerY" secondItem="ktD-s1-xso" secondAttribute="centerY" constant="-48.5" id="G27-BZ-2pL"/>
-                            <constraint firstItem="ktD-s1-xso" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" constant="317" id="GVN-ZH-5ea"/>
-                            <constraint firstAttribute="centerX" secondItem="g32-53-tu4" secondAttribute="centerX" constant="118.5" id="J2b-Tl-adE"/>
-                            <constraint firstItem="mgD-NK-35Y" firstAttribute="leading" secondItem="tCR-zj-utr" secondAttribute="leading" id="MuP-s8-Bvo"/>
-                            <constraint firstAttribute="centerY" secondItem="g32-53-tu4" secondAttribute="centerY" constant="-48" id="N18-HS-y8f"/>
-                            <constraint firstItem="tCR-zj-utr" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" constant="279" id="NeE-4M-wam"/>
-                            <constraint firstItem="mgD-NK-35Y" firstAttribute="centerX" secondItem="Zwo-EI-RAb" secondAttribute="centerX" id="NmZ-zy-yCh"/>
-                            <constraint firstItem="g32-53-tu4" firstAttribute="baseline" secondItem="ktD-s1-xso" secondAttribute="baseline" id="Qt6-UJ-TBH"/>
-                            <constraint firstItem="g32-53-tu4" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" constant="314" id="TPQ-67-LbT"/>
-                            <constraint firstAttribute="centerY" secondItem="Zwo-EI-RAb" secondAttribute="centerY" constant="-201" id="Uef-1W-gWt"/>
-                            <constraint firstItem="g32-53-tu4" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" constant="314" id="Vgq-Qq-8rp"/>
-                            <constraint firstItem="g32-53-tu4" firstAttribute="leading" secondItem="ktD-s1-xso" secondAttribute="trailing" constant="3" id="Wxt-xr-oKF"/>
-                            <constraint firstItem="g32-53-tu4" firstAttribute="leading" secondItem="ktD-s1-xso" secondAttribute="trailing" constant="3" id="XF5-oK-rF1"/>
-                            <constraint firstItem="mgD-NK-35Y" firstAttribute="leading" secondItem="V6Z-Wx-PfW" secondAttribute="leading" id="Y9f-eO-DdA"/>
-                            <constraint firstItem="g32-53-tu4" firstAttribute="firstBaseline" secondItem="ktD-s1-xso" secondAttribute="baseline" id="YFY-Zs-w4G"/>
-                            <constraint firstItem="mgD-NK-35Y" firstAttribute="trailing" secondItem="YOQ-UK-VpA" secondAttribute="trailing" id="Zhs-A3-aGA"/>
-                            <constraint firstItem="Zwo-EI-RAb" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" constant="466" id="eK5-JF-jJI"/>
-                            <constraint firstAttribute="centerY" secondItem="RDX-SE-uZR" secondAttribute="centerY" constant="19.5" id="exA-2w-6AA"/>
-                            <constraint firstItem="mgD-NK-35Y" firstAttribute="trailing" secondItem="QS5-Rx-YEW" secondAttribute="trailingMargin" id="fot-7U-qnY"/>
-                            <constraint firstItem="mgD-NK-35Y" firstAttribute="leading" secondItem="W3g-H4-KLN" secondAttribute="leading" id="fwS-bZ-Zbj"/>
-                            <constraint firstItem="mgD-NK-35Y" firstAttribute="leading" secondItem="ECI-20-Isa" secondAttribute="leading" id="gfy-xW-VMM"/>
-                            <constraint firstItem="ECI-20-Isa" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" constant="84" id="hYd-ST-6Jt"/>
-                            <constraint firstItem="g32-53-tu4" firstAttribute="baseline" secondItem="ktD-s1-xso" secondAttribute="baseline" id="jH0-qA-z8e"/>
-                            <constraint firstItem="mgD-NK-35Y" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" constant="37" id="juo-oh-Iqc"/>
-                            <constraint firstItem="g32-53-tu4" firstAttribute="firstBaseline" secondItem="ktD-s1-xso" secondAttribute="baseline" id="kmc-Mk-qo1"/>
-                            <constraint firstItem="V6Z-Wx-PfW" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" constant="199" id="n2M-cP-tOg"/>
-                            <constraint firstAttribute="centerY" secondItem="g32-53-tu4" secondAttribute="centerY" constant="-48" id="qu2-1z-IPO"/>
-                            <constraint firstAttribute="centerY" secondItem="W3g-H4-KLN" secondAttribute="centerY" constant="261.5" id="rg8-vd-Tka"/>
-                            <constraint firstItem="mgD-NK-35Y" firstAttribute="leading" secondItem="RDX-SE-uZR" secondAttribute="leading" id="sPV-W1-fYS"/>
-                            <constraint firstAttribute="centerY" secondItem="YOQ-UK-VpA" secondAttribute="centerY" constant="152" id="sdR-aR-IzE"/>
-                            <constraint firstAttribute="centerY" secondItem="tCR-zj-utr" secondAttribute="centerY" constant="-14" id="uyd-E9-UUg"/>
+                            <constraint firstItem="ktD-s1-xso" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" constant="320" id="16P-HA-i73"/>
+                            <constraint firstItem="mgD-NK-35Y" firstAttribute="trailing" secondItem="QS5-Rx-YEW" secondAttribute="trailingMargin" id="21B-Sl-EeV"/>
+                            <constraint firstItem="574-ea-EEo" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leadingMargin" id="6hb-G6-8CH"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Zwo-EI-RAb" secondAttribute="trailing" constant="189" id="9Dz-9e-Eaj"/>
+                            <constraint firstItem="ECI-20-Isa" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leadingMargin" id="Ac1-MK-Sg9"/>
+                            <constraint firstItem="Zwo-EI-RAb" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leadingMargin" constant="189" id="F8K-j0-kkj"/>
+                            <constraint firstItem="V6Z-Wx-PfW" firstAttribute="trailing" secondItem="QS5-Rx-YEW" secondAttribute="trailingMargin" id="Fmk-XP-fTS"/>
+                            <constraint firstItem="g32-53-tu4" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leadingMargin" constant="70" id="K35-Wx-mlu"/>
+                            <constraint firstItem="RDX-SE-uZR" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leadingMargin" id="KBI-vo-MrX"/>
+                            <constraint firstItem="YOQ-UK-VpA" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leadingMargin" id="LWf-8R-oye"/>
+                            <constraint firstItem="tCR-zj-utr" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leadingMargin" id="UwB-qy-Yhm"/>
+                            <constraint firstItem="W3g-H4-KLN" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leadingMargin" id="WPu-rP-Elb"/>
+                            <constraint firstItem="mgD-NK-35Y" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" constant="37" id="XGH-W6-75X"/>
+                            <constraint firstItem="tCR-zj-utr" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" constant="279" id="XUy-4k-xFz"/>
+                            <constraint firstItem="W3g-H4-KLN" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" constant="8" id="ZkS-7b-o7j"/>
+                            <constraint firstItem="RDX-SE-uZR" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" constant="250" id="fLl-Aa-Thm"/>
+                            <constraint firstItem="YOQ-UK-VpA" firstAttribute="trailing" secondItem="QS5-Rx-YEW" secondAttribute="trailingMargin" id="hZW-UA-zO4"/>
+                            <constraint firstItem="V6Z-Wx-PfW" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" constant="199" id="iGN-eb-rAu"/>
+                            <constraint firstItem="ECI-20-Isa" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" constant="84" id="lS8-qU-1HS"/>
+                            <constraint firstItem="mgD-NK-35Y" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leadingMargin" id="mHc-V5-VkZ"/>
+                            <constraint firstItem="574-ea-EEo" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" constant="170" id="prj-kQ-I2l"/>
+                            <constraint firstItem="Zwo-EI-RAb" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" constant="466" id="qXh-Rh-MhU"/>
+                            <constraint firstItem="tCR-zj-utr" firstAttribute="trailing" secondItem="QS5-Rx-YEW" secondAttribute="trailingMargin" id="rea-4p-yEU"/>
+                            <constraint firstItem="V6Z-Wx-PfW" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leadingMargin" id="sL3-03-21G"/>
+                            <constraint firstItem="g32-53-tu4" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" constant="314" id="w9f-eD-517"/>
+                            <constraint firstItem="YOQ-UK-VpA" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" constant="113" id="wyg-IK-eor"/>
+                            <constraint firstItem="ktD-s1-xso" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leadingMargin" id="yUp-dM-sbK"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="GVN-ZH-5ea"/>
-                                <exclude reference="N18-HS-y8f"/>
-                                <exclude reference="Qt6-UJ-TBH"/>
-                                <exclude reference="TPQ-67-LbT"/>
-                                <exclude reference="Vgq-Qq-8rp"/>
-                                <exclude reference="XF5-oK-rF1"/>
-                                <exclude reference="kmc-Mk-qo1"/>
-                            </mask>
-                        </variation>
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="favorites" id="cPa-gy-q4n"/>
                     <connections>

@@ -7,7 +7,7 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>876E0AA7-72A0-4F0A-A914-8A46230BEA41</string>
 	<key>IDESourceControlProjectName</key>
-	<string>BreakoutGame</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>04FE0AD680A6C80DCF92FBF02FD6B0F8F8A2BA9D</key>
@@ -16,7 +16,7 @@
 		<string>https://github.com/HANICA/MAD-student-EelcoWagenaar.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>BreakoutGame/BreakoutGame.xcodeproj</string>
+	<string>BreakoutGame/BreakoutGame.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>04FE0AD680A6C80DCF92FBF02FD6B0F8F8A2BA9D</key>
