@@ -30,7 +30,6 @@ class GameViewController: UIViewController, UICollisionBehaviorDelegate {
     func reload() {
         self.gameView.setNeedsDisplay()
         paddle!.removeFromSuperview()
-        println("reload")
         removeAllBricks()
     }
 
@@ -57,12 +56,6 @@ class GameViewController: UIViewController, UICollisionBehaviorDelegate {
         breakout.collisionDelegate = self
         
         gameView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: "panPaddle:"))
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: "swipePaddleLeft:")
-        swipeLeft.direction = .Left
-        gameView.addGestureRecognizer(swipeLeft)
-        let swipeRight = UISwipeGestureRecognizer(target: self, action: "swipePaddleRight:")
-        swipeRight.direction = .Right
-        gameView.addGestureRecognizer(swipeRight)
         
         self.firstLoad = false
     }
@@ -91,7 +84,7 @@ class GameViewController: UIViewController, UICollisionBehaviorDelegate {
             resetPaddle()
         }
         
-        resetPaddle()
+        placePaddle(CGPoint(x: 0, y: 0))
         placeBricks()
     }
     
@@ -169,25 +162,10 @@ class GameViewController: UIViewController, UICollisionBehaviorDelegate {
         }
     }
     
-    func swipePaddleLeft(gesture: UIPanGestureRecognizer) {
-        switch gesture.state {
-        case .Ended:
-            placePaddle(CGPoint(x: -gameView.bounds.maxX, y: 0.0))
-        default: break
-        }
-    }
-    
-    func swipePaddleRight(gesture: UIPanGestureRecognizer) {
-        switch gesture.state {
-            case .Ended:
-                placePaddle(CGPoint(x: gameView.bounds.maxX, y: 0.0))
-            default: break
-        }
-    }
-    
     func placePaddle(translation: CGPoint) {
         var origin = paddle!.frame.origin
         origin.x = max(min(origin.x + translation.x, gameView.bounds.maxX - self.PaddleSize.width), 0.0)
+        origin.y = gameView.bounds.maxY - paddle!.bounds.height - 100
         paddle!.frame.origin = origin
         addPaddleBarrier()
     }
@@ -215,7 +193,7 @@ class GameViewController: UIViewController, UICollisionBehaviorDelegate {
     
     let BrickTopSpacing: CGFloat = 0.05
     let BrickSpacing: CGFloat = 5.0
-    let BrickCornerRadius: CGFloat = 2.5
+    let BrickCornerRadius: CGFloat = 5
     
     func setColor(randomNumber: Int) -> UIColor {
         switch(randomNumber){
