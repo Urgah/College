@@ -31,6 +31,10 @@ class GameViewController: UIViewController, UICollisionBehaviorDelegate {
         self.gameView.setNeedsDisplay()
         paddle!.removeFromSuperview()
         removeAllBricks()
+        
+        if let ball = breakout.balls.first {
+            breakout.removeBall(ball)
+        }
     }
 
     
@@ -97,6 +101,7 @@ class GameViewController: UIViewController, UICollisionBehaviorDelegate {
     
     func pushBall(gesture: UITapGestureRecognizer) {
         if GameViewController.ballPushed == true {
+            breakout.changeBallAngle(breakout.balls.last!)
             return
         }
         
@@ -266,6 +271,8 @@ class GameViewController: UIViewController, UICollisionBehaviorDelegate {
     
     private func destroyBrickAtIndex(index: Int) {
         if let brick = bricks?[index] {
+            score++
+            self.scoreLabel.text = "Score: \(self.score)"
             if brick.hit() {
                 breakout.removeBarrier(index)
                 UIView.transitionWithView(brick.view, duration: 0.2, options: .TransitionFlipFromBottom, animations: {},completion: { (success) -> Void in
@@ -274,8 +281,6 @@ class GameViewController: UIViewController, UICollisionBehaviorDelegate {
                             }, completion: { (success) -> Void in
                                 brick.view.removeFromSuperview()
                                 self.totalBricks--
-                                self.score++
-                                self.scoreLabel.text = "Score: \(self.score)"
                                 self.checkGameWon()
                         })
                 })

@@ -92,4 +92,19 @@ class BreakOutBehaviour: UIDynamicBehavior {
     func removeBarrier(name: NSCopying) {
         collider.removeBoundaryWithIdentifier(name)
     }
+    
+    
+    func changeBallAngle(ball: UIView) {
+        let push = UIPushBehavior(items: [ball], mode: .Instantaneous)
+        push.magnitude = 1
+        
+        var angle:Double = Double(arc4random_uniform(30) + 75)
+        push.angle = CGFloat(angle)
+        push.action = { [weak push] in
+            if !push!.active {
+                self.removeChildBehavior(push!)
+            }
+        }
+        addChildBehavior(push)
+    }
 }
