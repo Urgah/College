@@ -10,10 +10,12 @@ import UIKit
 
 class SettingsViewController: UIViewController {
 
+    @IBOutlet weak var saveSettingsButton: UIButton!
     @IBOutlet weak var saveUiSwitch: UISwitch!
     var automaticSave: Bool = false
     @IBAction func uiSwitchChanged(sender: UISwitch) {
         automaticSave = sender.on
+        saveSettingsButton.hidden = automaticSave
         
         settings?.saveInstant = automaticSave
         settings?.setSettings()
@@ -129,6 +131,7 @@ class SettingsViewController: UIViewController {
         
         changeDifficulty.selectedSegmentIndex = difficulty
         saveUiSwitch.on = settings!.saveInstant
+        saveSettingsButton.hidden = settings!.saveInstant
     }
 
     override func didReceiveMemoryWarning() {

@@ -191,6 +191,7 @@
                         <outlet property="paddleSlider" destination="V6Z-Wx-PfW" id="gDz-ZD-gmN"/>
                         <outlet property="rowLabel" destination="W3g-H4-KLN" id="hPm-DM-bSC"/>
                         <outlet property="rowSlider" destination="mgD-NK-35Y" id="h88-Jq-Sid"/>
+                        <outlet property="saveSettingsButton" destination="Zwo-EI-RAb" id="mzC-7z-015"/>
                         <outlet property="saveUiSwitch" destination="9zF-BV-sZK" id="Ipj-tv-TEk"/>
                         <outlet property="speedLabel" destination="RDX-SE-uZR" id="bS6-ts-4zI"/>
                         <outlet property="speedSlider" destination="tCR-zj-utr" id="CRL-f1-Tu4"/>
