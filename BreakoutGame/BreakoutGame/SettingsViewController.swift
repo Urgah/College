@@ -10,6 +10,15 @@ import UIKit
 
 class SettingsViewController: UIViewController {
 
+    @IBOutlet weak var saveUiSwitch: UISwitch!
+    var automaticSave: Bool = false
+    @IBAction func uiSwitchChanged(sender: UISwitch) {
+        automaticSave = sender.on
+        
+        settings?.saveInstant = automaticSave
+        settings?.setSettings()
+    }
+    
     @IBOutlet weak var rowLabel: UILabel!
     @IBOutlet weak var rowSlider: UISlider!
     @IBAction func rowSliderSet(sender: UISlider) {
@@ -17,6 +26,10 @@ class SettingsViewController: UIViewController {
         var rowSliderNumb = Int(round(rowSlider.value))
         
         rowLabel.text = "Rows: \(rowSliderNumb)"
+        
+        if automaticSave {
+            saveSettings()
+        }
     }
     
 
@@ -30,14 +43,13 @@ class SettingsViewController: UIViewController {
     }
     
     func saveSettings() {
-        settings?.setSettings()
-        
         var gameView = self.tabBarController?.viewControllers?[0] as! UIViewController
         gameView.viewDidLoad()
 
     }
     
     @IBAction func saveSettingsAndResetGame(sender: UIButton) {
+        settings?.setSettings()
         saveSettings()
     }
     
@@ -49,6 +61,10 @@ class SettingsViewController: UIViewController {
         var paddleSliderNumb = Int(round(sender.value))
         
         paddleLabel.text = "Paddle width: \(paddleSliderNumb)"
+        
+        if automaticSave {
+            saveSettings()
+        }
     }
     
     @IBOutlet weak var speedSlider: UISlider!
@@ -58,6 +74,10 @@ class SettingsViewController: UIViewController {
         var speedSliderNumb = Int(round(sender.value))
         
         speedLabel.text = "Speed: \(speedSliderNumb)"
+        
+        if automaticSave {
+            saveSettings()
+        }
     }
 
     @IBOutlet weak var changeDifficulty: UISegmentedControl!
@@ -73,6 +93,10 @@ class SettingsViewController: UIViewController {
         }
         
         settings?.lifes = lifes
+        
+        if automaticSave {
+            saveSettings()
+        }
     }
     
     var settings: Settings?
@@ -81,7 +105,6 @@ class SettingsViewController: UIViewController {
         super.viewDidLoad()
 
         settings = Settings()
-        settings?.getSettings()
         
         rowSlider.value = Float(settings!.rows)
         rowLabel.text = "Rows: \(settings!.rows)"
@@ -105,6 +128,7 @@ class SettingsViewController: UIViewController {
         }
         
         changeDifficulty.selectedSegmentIndex = difficulty
+        saveUiSwitch.on = settings!.saveInstant
     }
 
     override func didReceiveMemoryWarning() {
