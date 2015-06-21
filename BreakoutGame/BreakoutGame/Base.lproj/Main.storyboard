@@ -49,7 +49,7 @@
             </objects>
             <point key="canvasLocation" x="750" y="-320"/>
         </scene>
-        <!--Settings View Controller-->
+        <!--Settings-->
         <scene sceneID="wg7-f3-ORb">
             <objects>
                 <viewController id="8rJ-Kc-sve" customClass="SettingsViewController" customModule="BreakoutGame" customModuleProvider="target" sceneMemberID="viewController">
@@ -138,7 +138,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Apply settings after change" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BkA-vV-coa">
                                 <rect key="frame" x="16" y="397" width="210" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="9zF-BV-sZK">
@@ -182,7 +182,7 @@
                             <constraint firstItem="ktD-s1-xso" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leadingMargin" id="yUp-dM-sbK"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" systemItem="favorites" id="cPa-gy-q4n"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="icon_settings" selectedImage="favorties" id="cPa-gy-q4n"/>
                     <connections>
                         <outlet property="changeDifficulty" destination="g32-53-tu4" id="J7L-Q1-bHE"/>
                         <outlet property="columnLabel" destination="ECI-20-Isa" id="qfs-M4-nt8"/>
@@ -223,6 +223,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="favorties" width="30" height="30"/>
         <image name="first" width="30" height="30"/>
+        <image name="icon_settings" width="30" height="30"/>
     </resources>
 </document>
