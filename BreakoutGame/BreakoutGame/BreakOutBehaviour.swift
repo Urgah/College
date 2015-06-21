@@ -98,7 +98,7 @@ class BreakOutBehaviour: UIDynamicBehavior {
         let push = UIPushBehavior(items: [ball], mode: .Instantaneous)
         push.magnitude = 1
         
-        var angle:Double = Double(arc4random_uniform(30) + 75)
+        var angle:Double = Double(arc4random_uniform(360))
         push.angle = CGFloat(angle)
         push.action = { [weak push] in
             if !push!.active {

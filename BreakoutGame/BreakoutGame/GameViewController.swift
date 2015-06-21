@@ -37,6 +37,14 @@ class GameViewController: UIViewController, UICollisionBehaviorDelegate {
         }
     }
 
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated);
+        if let ball = breakout.balls.last {
+            lifes++
+            breakout.removeBall(ball)
+        }
+
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

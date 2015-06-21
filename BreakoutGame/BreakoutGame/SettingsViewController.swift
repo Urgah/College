@@ -16,7 +16,7 @@ class SettingsViewController: UIViewController {
     @IBAction func uiSwitchChanged(sender: UISwitch) {
         automaticSave = sender.on
         saveSettingsButton.hidden = automaticSave
-        
+
         settings?.saveInstant = automaticSave
         settings?.setSettings()
     }
@@ -28,7 +28,6 @@ class SettingsViewController: UIViewController {
         var rowSliderNumb = Int(round(rowSlider.value))
         
         rowLabel.text = "Rows: \(rowSliderNumb)"
-        
         if automaticSave {
             saveSettings()
         }
@@ -42,16 +41,18 @@ class SettingsViewController: UIViewController {
         var columnSliderNumb = Int(round(columnSlider.value))
         
         columnLabel.text = "Columns: \(columnSliderNumb)"
+        if automaticSave {
+            saveSettings()
+        }
     }
     
     func saveSettings() {
+        settings?.setSettings()
         var gameView = self.tabBarController?.viewControllers?[0] as! UIViewController
         gameView.viewDidLoad()
-
     }
     
     @IBAction func saveSettingsAndResetGame(sender: UIButton) {
-        settings?.setSettings()
         saveSettings()
     }
     
@@ -131,6 +132,7 @@ class SettingsViewController: UIViewController {
         
         changeDifficulty.selectedSegmentIndex = difficulty
         saveUiSwitch.on = settings!.saveInstant
+        automaticSave = settings!.saveInstant
         saveSettingsButton.hidden = settings!.saveInstant
     }
 
