@@ -322,10 +322,6 @@ class GameViewController: UIViewController, UICollisionBehaviorDelegate {
             self.viewDidLoad()
             })
         
-        if let ball = breakout.balls.last {
-            breakout.removeBall(ball)
-        }
-
         self.presentViewController(gameLostAlert, animated: true, completion: nil)
     }
     
