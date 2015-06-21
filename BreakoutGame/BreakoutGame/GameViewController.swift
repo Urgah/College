@@ -307,6 +307,11 @@ class GameViewController: UIViewController, UICollisionBehaviorDelegate {
             gameWonAlert.addAction(UIAlertAction(title: "Play again", style: .Default) { action -> Void in
                 self.viewDidLoad()
             })
+            
+            if let ball = breakout.balls.last {
+                breakout.removeBall(ball)
+            }
+            
             self.presentViewController(gameWonAlert, animated: true, completion: nil)
         }
     }
@@ -317,6 +322,10 @@ class GameViewController: UIViewController, UICollisionBehaviorDelegate {
             self.viewDidLoad()
             })
         
+        if let ball = breakout.balls.last {
+            breakout.removeBall(ball)
+        }
+
         self.presentViewController(gameLostAlert, animated: true, completion: nil)
     }
     
